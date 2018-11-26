@@ -19,7 +19,7 @@ export default class HomeScreen extends React.Component {
 
   render() {
     return (
-      <View>
+      <View styles=>
         <Image
          source={require('https://placeimg.com/200/200/people')}
          fadeDuration={0}
@@ -29,6 +29,6 @@ export default class HomeScreen extends React.Component {
     )
   }
 
-  const styles = StyleSheet.create( {
+  const styles = StyleSheet.create({
 
   })
