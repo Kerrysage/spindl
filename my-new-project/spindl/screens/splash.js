@@ -20,8 +20,8 @@ class splash extends React.Component {
     render () {
         return (
             <View>
+                <Text as='h1'> Spindl</Text>
                 <userStatus />
-                <Text> Hello </Text>
             </View>
         )
     }
