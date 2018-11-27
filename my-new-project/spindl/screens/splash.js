@@ -1,4 +1,5 @@
 import React from 'react';
+import userStatus from './userStatus'
 import {
   Image,
   Platform,
@@ -18,7 +19,10 @@ class splash extends React.Component {
     }
     render () {
         return (
-            <View><Text> Hello </Text></View>
+            <View>
+                <userStatus />
+                <Text> Hello </Text>
+            </View>
         )
     }
 }
