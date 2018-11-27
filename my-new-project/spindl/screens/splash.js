@@ -21,7 +21,7 @@ class splash extends React.Component {
         return (
             <View>
                 <Text as='h1'> Spindl</Text>
-                <userStatus />
+                {/* <userStatus /> */}
             </View>
         )
     }

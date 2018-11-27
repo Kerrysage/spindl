@@ -3,15 +3,15 @@ import { Platform } from 'react-native';
 import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
 
 import TabBarIcon from '../components/TabBarIcon';
-import HomeScreen from '../screens/HomeScreen';
-import LinksScreen from '../screens/LinksScreen';
+import questionaire from '../screens/questionaire';
+import splash from '../screens/splash';
 import SettingsScreen from '../screens/SettingsScreen';
 
-const HomeStack = createStackNavigator({
-  Home: HomeScreen,
+const QuestionaireStack = createStackNavigator({
+  Home: questionaire,
 });
 
-HomeStack.navigationOptions = {
+QuestionaireStack.navigationOptions = {
   tabBarLabel: 'Home',
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
@@ -25,11 +25,11 @@ HomeStack.navigationOptions = {
   ),
 };
 
-const LinksStack = createStackNavigator({
-  Links: LinksScreen,
+const SplashStack = createStackNavigator({
+  Links: splash,
 });
 
-LinksStack.navigationOptions = {
+SplashStack.navigationOptions = {
   tabBarLabel: 'Links',
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
@@ -54,7 +54,7 @@ SettingsStack.navigationOptions = {
 };
 
 export default createBottomTabNavigator({
-  HomeStack,
-  LinksStack,
+  QuestionaireStack,
+  SplashStack,
   SettingsStack,
 });

@@ -19,9 +19,9 @@ export default class Questionaire extends React.Component {
 
   render() {
     return (
-      <View styles={styles.constainer}>
+      <View styles={styles.container}>
         <Image
-         source={require('https://placeimg.com/200/200/people')}
+         source={{uri:'https://placeimg.com/200/200/people'}}
          fadeDuration={0}
          style={{width: 20, height: 20}}
         />
@@ -30,13 +30,15 @@ export default class Questionaire extends React.Component {
           Age
           Location
         </Text>
-     <View>
+     </View>
     )
   }
+}
 
-  {/* const styles = StyleSheet.create({
+const styles = StyleSheet.create({
     container: {
       flex: 1,
       backgroundColor: '#fff',
     }
-  }) */}
+  })
+
