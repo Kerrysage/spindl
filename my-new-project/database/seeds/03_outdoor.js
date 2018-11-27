@@ -1,10 +1,10 @@
 
 exports.seed = function(knex, Promise) {
   // Deletes ALL existing entries
-  return knex.raw('DELETE FROM "outdoors"; ALTER SEQUENCE outdoors_id_seq RESTART WITH 11;')
+  return knex.raw('DELETE FROM "outdoor"; ALTER SEQUENCE outdoor_id_seq RESTART WITH 11;')
     .then(function () {
       // Inserts seed entries
-      return knex('outdoors').insert([
+      return knex('outdoor').insert([
         {id: 1, activity: 'Hiking'},
         {id: 2, activity: 'Bowling'},
         {id: 3, activity: 'Swimming'},
