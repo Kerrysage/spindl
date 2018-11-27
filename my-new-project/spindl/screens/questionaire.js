@@ -27,24 +27,19 @@ export default class Questionaire extends React.Component {
   }
 
   clickMe = () => {
-    alert(this.state.PickerValue)
+      console.log(this.state)
   }
 
   render() {
     return (
-      <ScrollView style={{flex: 3, display: 'flex', flexDirection: 'column'}}>
+      <ScrollView style={{flex: 3, display: 'flex', flexDirection: 'column'}, styles.contentContainer}>
         <Image
          source={{uri:'https://placeimg.com/200/200/people'}}
          fadeDuration={0}
          style={{width: 200, height: 200,marginTop: 35, marginLeft: 25}}
         />
-        {/* <Text numberOfLines={5}>
-          Name
-          Age
-          Location
-        </Text> */}
-     <View tyle={styles.profile}>
-       <Text style={styles.profileInfo, styles.profile}>
+     <View style={styles.profile}>
+       <Text style={styles.profileInfo}>
          Name
        </Text>
        <Text style={styles.profileInfo}>
@@ -162,5 +157,8 @@ const styles = StyleSheet.create({
     submitFlex: {
       display: 'flex',
       flexDirection: 'row'
-    }
+    },
+    contentContainer: {
+      paddingVertical: 20
+}
   })
