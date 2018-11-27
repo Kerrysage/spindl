@@ -1,32 +1,40 @@
 import React from 'react';
 import userStatus from './userStatus'
 import {
-  Image,
-  Platform,
-  ScrollView,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
+    Image,
+    Platform,
+    ScrollView,
+    StyleSheet,
+    Text,
+    TouchableOpacity,
+    View,
 } from 'react-native';
 
 //login
-class splash extends React.Component {
+export default class Splash extends React.Component {
     state = {
         username: '',
         password: ''
 
     }
+
     render () {
         return (
-            <View>
-                <Text as='h1'> Spindl</Text>
+            <View style={styles.container}>
+                <Text style={styles.header}> Dream Date!</Text>
                 {/* <userStatus /> */}
             </View>
         )
     }
 }
 
-
-
-export default splash 
+    const styles = StyleSheet.create({
+        container:{
+            paddingHorizontal: 10,
+            paddingVertical:10
+        },
+        header:{
+            fontSize:12,
+            
+        }
+    })
