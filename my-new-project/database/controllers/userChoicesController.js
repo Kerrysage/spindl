@@ -13,6 +13,7 @@ const getALL = (req, res, next) => {
 
 }
 
+
 const getOne = (req, res, next) => {
     const id = req.params.id
     if(!Number(id)){
@@ -25,11 +26,26 @@ const getOne = (req, res, next) => {
             if(!choices.length){
                 return res.json({error: "This choice doesn't exist"})
             } else {
-                res.json({choices: choices})
+                return res.json({choices: choices})
             }
         })
     }
 }
+
+
+const postChoice = (req, res, next) => {
+        return knex('user_choices')
+        .insert(req.body)
+        .returning('*')
+        .then(choices => {
+            if(!choices.length){
+                return res.json({error: "This choice doesn't exist"})
+            } else {
+                return res.json({choices: choices})
+            }
+        })
+    }
+
 
 
 
@@ -38,5 +54,6 @@ const getOne = (req, res, next) => {
 
 module.exports = {
     getALL,
-    getOne
+    getOne,
+    postChoice
 }
