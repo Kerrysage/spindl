@@ -24,7 +24,15 @@ app.use(function(req, res, next) {
 
 
 app.get('/', (req, res, next) => {
-    res.json({message: "RRRAAAWRRRR", food: `http://localhost:${port}/food`})
+    res.json({
+        message: "RRRAAAWRRRR", 
+        food: `http://localhost:${port}/food`,
+        'movie genres': `http://localhost:${port}/movie`,
+        indoor: `http://localhost:${port}/indoor`,
+        outdoor: `http://localhost:${port}/outdoor`, 
+        nightlife: `http://localhost:${port}/nightlife`,
+        users: `http://localhost:${port}/users`
+    })
 })
 
 app.use('/food', foodRoutes)
