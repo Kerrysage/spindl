@@ -8,7 +8,6 @@ router.get('/:id', controller.getOne)
 router.post('/', controller.postUser)
 router.put('/:id', controller.putUser)
 router.delete('/:id', controller.deleteUser)
-router.post('/signup', controller.newUser)
 
 
 module.exports = router

@@ -1,7 +1,4 @@
 const knex = require('../db/connection')
-const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken')
-const saltRounds = 12
 
 const getALL = (req, res, next) => {
     return knex('user_profile')
@@ -64,29 +61,6 @@ const deleteUser = (req, res, next) => {
         .catch(err => console.log('ERROR:', err))
 }
 
-const newUser = (req, res, next) => {
-    const email = req.body.email
-    // return knex('user_profile')
-    //     .where('email', email)
-    //     .then(user => {
-    //         if(!user.length){
-                const hashPassword = bcrypt.hashSync(req.body.password, saltRounds)
-                req.body.password =  hashPassword
-                knex('user_profile')
-                    .insert(req.body)
-                    .returning('*')
-                    .then(newUser => {
-                        const payload = JSON.parse(JSON.stringify(newUser[0]))
-                        delete payload.password
-                        const token = jwt.sign(payload, process.env.TOKEN_SECRET)
-                        res.json({token})
-                    })
-            // } else {
-            //     res.json({error: 'Error: email already registered. Please enter a different email and try again'})
-            // }
-        // })
-}
-
 
 module.exports = {
     getALL,
@@ -94,5 +68,4 @@ module.exports = {
     postUser,
     putUser,
     deleteUser, 
-    newUser
 }
