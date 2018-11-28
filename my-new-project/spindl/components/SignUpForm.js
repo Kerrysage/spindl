@@ -1,5 +1,12 @@
 import React from 'react';
+import RadioForm, {RadioButton, RadioButtonInput, RadioButtonLabel} from 'react-native-simple-radio-button';
 import {StyleSheet, Text, View, TextInput, TouchableOpacity} from 'react-native';
+
+const age = [
+    {label: 'Male', value: 0},
+    {label: 'Female', value:1},
+    {label: 'Other', value:2},
+];
 
 export default class SignUpForm extends React.Component {
     render() {
@@ -8,10 +15,21 @@ export default class SignUpForm extends React.Component {
                 <Text style={styles.header}>Sign Up</Text>
                 <TextInput style={styles.textInput} placeholder='Full Name' />
                 <TextInput style={styles.textInput} placeholder='Email' />
+                <TextInput style={styles.textInput} placeholder='Location' />
+                <TextInput style={styles.textInput} placeholder='Age' />
+                <TextInput style={styles.textInput} placeholder='Location' />
                 <TextInput style={styles.textInput} placeholder='Password' />
-
+                <RadioForm 
+                    style= {styles.radioStyle}
+                    radio_props ={age}
+                    initial={-1}
+                    onPress={(value) => {}}
+                    buttonSize={15}
+                    buttonOuterSize={20}
+                    formHorizontal={true}
+                />
                 <TouchableOpacity style={styles.button}>
-                    <Text style={styles.btnText}>Sign Up</Text>
+                    <Text style={styles.btnText}>Submit</Text>
                 </TouchableOpacity>
             </View>
         )
@@ -45,6 +63,13 @@ const styles = StyleSheet.create({
         borderBottomColor: "#f8f8f8",
         borderBottomWidth: 1,
     },
+    radioStyle: {
+        fontSize:12,
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'space-around'
+        
+    },
     button: {
         alignSelf: 'stretch',
         alignItems: 'center',
@@ -54,7 +79,7 @@ const styles = StyleSheet.create({
     },
     btnText: {
         color: 'rgba(255, 255, 255, 0.8)',
-        fontSize: 12,
+        fontSize: 16,
         fontWeight: 'bold'
     }
 

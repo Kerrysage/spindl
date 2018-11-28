@@ -100,7 +100,7 @@ const styles = StyleSheet.create({
         fontWeight: '600',
         marginBottom: 20,
         textAlign: 'center',
-        paddingTop: 20,
+        paddingTop: 30,
     },
     button: {
         alignSelf: 'stretch',
