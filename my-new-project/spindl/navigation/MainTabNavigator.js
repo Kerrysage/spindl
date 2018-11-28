@@ -31,7 +31,7 @@ const SplashStack = createStackNavigator({
 });
 
 SplashStack.navigationOptions = {
-  tabBarLabel: 'Links',
+  tabBarLabel: 'Splash',
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
