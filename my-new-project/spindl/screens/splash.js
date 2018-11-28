@@ -74,8 +74,6 @@ export default class Splash extends React.Component {
             alignItems: 'center',
             justifyContent: 'center',
             color: 'black',
-            borderRadius: 50,
-            borderWidth: 0.5,
             borderColor: '#d6d7da'
         },
         text:{
