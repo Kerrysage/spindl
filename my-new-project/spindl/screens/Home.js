@@ -51,6 +51,9 @@ export default class Home extends React.Component {
             color="#f44242"
             accessibilityLabel="Learn more about this purple button"
           />
+
+        </View>
+        <View>
           <Button
             onPress={this.adding}
             title="My Matches"

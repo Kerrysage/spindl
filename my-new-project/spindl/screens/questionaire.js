@@ -21,15 +21,44 @@ export default class Questionaire extends React.Component {
     header: null
   };
 
-  state = {}
+    state = {
+      // food: null
+    };
 
   clickMe = () => {
-    console.log(this.state)
+    // console.log(this.state)
+  };
+
+
+  componentDidMount(){
+    fetch('http://10.6.69.51:3000/food')
+    .then((response) => response.json())
+    .then((data) => {
+      // console.log(data.food[3].type)
+      this.setState({
+        food: data.food,
+      }, function(){
+      });
+      // console.log(this.state);
+    })
+    .catch((error) =>{
+      console.error(error);
+      // console.log('error');
+    });
   }
 
+
   render() {
+    // console.log(this.state.food);
+    var arr = []
+    // for (var i = 0; i < this.state.food.length; i++) {
+    //   console.log(this.state.food);
+    // }
+    // const foodDrop = this.state.food.map(item => {
+    //   return arr.push(item)
+    // })
     return (<ScrollView style={{
-      flex: 3, 
+      flex: 3,
       display: 'flex',
       flexDirection: 'column'}}>
         <Image
@@ -49,6 +78,9 @@ export default class Questionaire extends React.Component {
         </Text>
 
       </View>
+      <View>
+        <Text>Food</Text>
+      </View>
       <View style={styles.submit}>
         <Picker
           selectedValue={'Food'}
@@ -56,10 +88,8 @@ export default class Questionaire extends React.Component {
           onValueChange={(itemValue, itemIndex) =>
             this.setState({Food: itemValue})
           }>
-          <Picker.Item label="Food" value="" />
-          <Picker.Item label="test" value="test" />
-          <Picker.Item label="test2" value="test2" />
-          <Picker.Item label="test3" value="test3" />
+          <Picker.Item enabled="false" label="" value="" />
+
         </Picker>
         <Button title="Send It" onPress={this.clickMe}/>
       </View>
@@ -147,7 +177,7 @@ const styles = StyleSheet.create({
       flexDirection: 'column'
     },
     submit: {
-      width: 100
+      // width: 100
     },
     submitFlex: {
       display: 'flex',
