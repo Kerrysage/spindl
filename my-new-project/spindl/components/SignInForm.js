@@ -1,15 +1,61 @@
 import React from 'react';
 import {StyleSheet, Text, View, TextInput, TouchableOpacity} from 'react-native';
+import {withNavigation} from 'react-navigation';
 
-export default class SignInForm extends React.Component {
+class SignInForm extends React.Component {
+    state = {
+        email: '',
+        password: ''
+    }
+    getEmail = () => {
+
+    }
+    getPassword = () => {
+
+    }
+    signIn = () => {
+        fetch ('http://10.6.68.160:3000/auth/login', {
+            method: 'POST',
+            mode: 'cors',
+            headers: {
+                'Content-Type': 'application/json; charset=utf-8'
+            },
+            body: JSON.stringify({
+                'email': this.state.email,
+                'password': this.state.password
+            }) 
+        }) 
+        .then(response => {
+            this.props.navigation.navigate('Profile')
+            return response.json()
+        })
+        
+
+    }
     render() {
         return(
             <View style={styles.SignInForm}>
                 <Text style={styles.header}>Sign In</Text>
-                <TextInput style={styles.textInput} placeholder='Email' />
-                <TextInput style={styles.textInput} placeholder='Password' secureTextEntry={true}/>
+                <TextInput onChangeText={(inputText) => {
+                    this.setState(
+                        () => {
+                            return {
+                                email: inputText
+                            }
+                        }
+                    )
+                }} style={styles.textInput} placeholder='Email' />
+                <TextInput onChangeText={(inputText) => {
+                    this.setState(
+                        () => {
+                            return {
+                                password: inputText
+                            }
+                        }
+                    )
+                }} style={styles.textInput} placeholder='Password' secureTextEntry={true}/>
 
-                <TouchableOpacity style={styles.button}>
+                <TouchableOpacity onPress={this.signIn} style={styles.button}>
                     <Text style={styles.btnText}>Sign In</Text>
                 </TouchableOpacity>
                 <Text 
@@ -70,3 +116,5 @@ const styles = StyleSheet.create({
     }
 
 })
+
+export default withNavigation(SignInForm)
