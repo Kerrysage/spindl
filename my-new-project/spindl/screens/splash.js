@@ -11,6 +11,7 @@ import {
 } from 'react-native';
 import SignInForm from '../components/SignInForm';
 
+
 //login
 export default class Splash extends React.Component {
     static navigationOptions = {
@@ -25,11 +26,11 @@ export default class Splash extends React.Component {
 
     render () {
         return (
-            <ScrollView>
+            <ScrollView style= {styles.scrollView}>
                 <View style={styles.container}>
                     <Image 
-                    style= {styles.images}
-                    source={require('../assets/images/dd-logo.png')}
+                        style= {styles.images}
+                        source={require('../assets/images/dd-logo.png')}
                     />
                     <SignInForm />
                 </View>
@@ -39,16 +40,16 @@ export default class Splash extends React.Component {
 }
 
     const styles = StyleSheet.create({
+        scrollView:{
+            flex: 1,
+            backgroundColor: '#F98F8F'
+        },
         container:{
-            width: 'auto',
-            height: '100%',
             paddingHorizontal: 10,
             paddingVertical:10,
             paddingTop: 40,
-            flex: 1,
             flexDirection: 'column',
             alignItems: 'center',
-            backgroundColor: '#F98F8F'
         },
         images:{
             height: 100,
