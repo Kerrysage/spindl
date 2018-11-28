@@ -4,11 +4,12 @@ import { createStackNavigator, createBottomTabNavigator } from 'react-navigation
 
 import TabBarIcon from '../components/TabBarIcon';
 import questionaire from '../screens/questionaire';
+import Home from '../screens/Home';
 import splash from '../screens/splash';
 import SettingsScreen from '../screens/SettingsScreen';
 
 const QuestionaireStack = createStackNavigator({
-  Home: questionaire,
+  Home: Home,
 });
 
 QuestionaireStack.navigationOptions = {

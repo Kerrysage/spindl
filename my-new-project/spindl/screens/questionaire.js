@@ -8,32 +8,29 @@ import {
   Button,
   Picker,
   TouchableOpacity,
-  View,
+  View
 } from 'react-native';
-import { WebBrowser } from 'expo';
+import {WebBrowser} from 'expo';
 
-import { MonoText } from '../components/StyledText';
+import {MonoText} from '../components/StyledText';
 
 // import ModalDropdown from 'react-native-modal-dropdown';
 
-
 export default class Questionaire extends React.Component {
   static navigationOptions = {
-    header: null,
+    header: null
   };
 
-  state = {
-
-  }
+  state = {}
 
   clickMe = () => {
-      console.log(this.state)
+    console.log(this.state)
   }
 
   render() {
     return (<ScrollView style={{
       flex: 3, 
-      display: 'flex', 
+      display: 'flex',
       flexDirection: 'column'}}>
         <Image
           source={{uri:'https://placeimg.com/200/200/people'}}
@@ -81,16 +78,15 @@ export default class Questionaire extends React.Component {
         <Button title="Send It" onPress={this.clickMe}/>
       </View>
       <View style={styles.submit}>
-        <Picker
-          selectedValue={'Indoor'}
-          style={ {height: 50, width: 200}}
-          onValueChange={(itemValue, itemIndex) =>
-            this.setState({Indoor: itemValue})
-          }>
-          <Picker.Item label="Indoor" value="" />
-          <Picker.Item label="test" value="test" />
-          <Picker.Item label="test2" value="test2" />
-          <Picker.Item label="test3" value="test3" />
+        <Picker selectedValue={'Indoor'} style={{
+            height: 50,
+            width: 200
+          }} onValueChange={(itemValue, itemIndex) => this.setState({Indoor: itemValue})
+}>
+          <Picker.Item label="Indoor" value=""/>
+          <Picker.Item label="test" value="test"/>
+          <Picker.Item label="test2" value="test2"/>
+          <Picker.Item label="test3" value="test3"/>
         </Picker>
         <Button title="Send It" onPress={this.clickMe}/>
       </View>
@@ -123,12 +119,9 @@ export default class Questionaire extends React.Component {
         <Button title="Send It" onPress={this.clickMe}/>
       </View>
       {/* </View> */}
-      </ ScrollView>
-    )
+    </ScrollView>)
   }
 }
-
-
 
 const styles = StyleSheet.create({
     container: {
