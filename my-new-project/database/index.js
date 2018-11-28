@@ -1,3 +1,4 @@
+require('dotenv').config()
 const express = require('express')
 const app =  express()
 let port = process.env.PORT || 3000
@@ -9,10 +10,18 @@ const indoorRoutes = require('./routes/indoorRoutes')
 const outdoorRoutes = require('./routes/outdoorRoutes')
 const nightlifeRoutes = require('./routes/nightlifeRoutes')
 const userRoutes = require('./routes/userRoutes')
+const auth = require('./routes/auth')
 
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 app.use(cors())
+
+app.use(function(req, res, next) {
+    res.header('Access-Control-Allow-Origin', req.headers.origin);
+    res.header('Access-Control-Allow-Headers', 'Authorization');
+    next();
+});
+
 
 app.get('/', (req, res, next) => {
     res.json({message: "RRRAAAWRRRR", food: `http://localhost:${port}/food`})
@@ -24,6 +33,7 @@ app.use('/indoor', indoorRoutes)
 app.use('/outdoor', outdoorRoutes)
 app.use('/nightlife', nightlifeRoutes)
 app.use('/users', userRoutes)
+app.use('/signup', auth)
 
 
 app.use(notFound);
