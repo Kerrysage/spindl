@@ -39,7 +39,8 @@ const returningUser = (req, res, next) => {
                     const hashPassword = user[0].password
                     const match = bcrypt.compareSync(req.body.password, hashPassword)
                     if(match){
-                        //generate sesson token
+                        //generate session token
+                        console.log('signin')
                         const payload = JSON.parse(JSON.stringify(user[0]))
                         delete payload.password
                         const token = jwt.sign(payload, process.env.TOKEN_SECRET)
@@ -49,7 +50,8 @@ const returningUser = (req, res, next) => {
                     }
                 }
             })
-}
+            .catch(err => console.log('error', err))
+        }
     
 
 module.exports = {
