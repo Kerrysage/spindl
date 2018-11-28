@@ -34,11 +34,12 @@ export default class Splash extends React.Component {
                     style= {styles.images}
                     source={require('../assets/images/dd-logo.png')}
                     />
-
-                    
-                    {/* <userStatus /> */}
-                    <SignUpForm />
                     <SignInForm />
+                    <Text 
+                        style={styles.link}
+                        onPress={() => LinkingIOS.openURL('http://google.com')}>
+                        Create New Account
+                        </Text>
                 </View>
             
 
@@ -51,14 +52,14 @@ export default class Splash extends React.Component {
     const styles = StyleSheet.create({
         container:{
             width: '100%',
-            height: '`100%',
+            height: '100%',
             paddingHorizontal: 10,
             paddingVertical:10,
             paddingTop: 40,
             flex: 1,
             flexDirection: 'column',
             alignItems: 'center',
-            backgroundColor: '#F7A5A7'
+            backgroundColor: '#F98F8F'
         },
         images:{
             height: 100,
@@ -68,6 +69,12 @@ export default class Splash extends React.Component {
         },
         header:{
             fontSize:12,
+        },
+        link:{
+            color: '#579AD3',
+            fontSize: 16,
+            fontWeight: '600',
+            marginBottom: 20,
         },
         signIn: {
             height: 40,
