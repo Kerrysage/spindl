@@ -9,7 +9,7 @@ import {
     View,
     TextInput
 } from 'react-native';
-import SignInForm from '../components/SignInForm';
+import SignUpForm from '../components/SignUpForm';
 
 //login
 export default class Splash extends React.Component {
@@ -31,7 +31,7 @@ export default class Splash extends React.Component {
                     style= {styles.images}
                     source={require('../assets/images/dd-logo.png')}
                     />
-                    <SignInForm />
+                    <SignUpForm />
                 </View>
             </ScrollView>
         )
