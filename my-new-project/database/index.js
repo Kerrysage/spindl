@@ -26,18 +26,6 @@ app.use('/nightlife', nightlifeRoutes)
 app.use('/users', userRoutes)
 
 
-
-
-
-
-
-
-
-
-
-
-
-
 app.use(notFound);
 app.use(errorHandler);
 

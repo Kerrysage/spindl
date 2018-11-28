@@ -5,9 +5,9 @@ exports.seed = function(knex, Promise) {
     .then(function () {
       // Inserts seed entries
       return knex('user_profile').insert([
-        {id: 1, name: 'Dan', gender: 'M', age: 22, location: 'Galvanize', picture: 'https://picsum.photos/200/300/?random', password: '', username: ''},
-        {id: 2, name: 'Victor', gender: 'M', age: 26, location: 'Galvanize', picture: 'https://picsum.photos/200/300/?random', password: '', username: ''},
-        {id: 3, name: 'Kerry', gender: 'F', age: 22, location: 'Miami', picture: 'https://picsum.photos/200/300/?random', password: '', username: ''},
+        {id: 1, name: 'Dan', gender: 'M', age: 22, location: 'Galvanize', picture: 'https://picsum.photos/200/300/?random', password: '', username: '', email: 'daniel.phonelath@gmail.com'},
+        {id: 2, name: 'Victor', gender: 'M', age: 26, location: 'Galvanize', picture: 'https://picsum.photos/200/300/?random', password: '', username: '', email: 'montoya.victor7@gmail.com'},
+        {id: 3, name: 'Kerry', gender: 'F', age: 22, location: 'Miami', picture: 'https://picsum.photos/200/300/?random', password: '', username: '', email: 'kerrysage89@gmail.com'},
       ]);
     });
 };
