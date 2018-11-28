@@ -1,6 +1,7 @@
 import React from 'react';
 import {
   Image,
+  Button,
   Platform,
   ScrollView,
   StyleSheet,
@@ -16,6 +17,10 @@ export default class Home extends React.Component {
   static navigationOptions = {
     header: null,
   };
+
+  adding = () => {
+    console.log('ayyeee');
+  }
 
   render() {
     return(
@@ -38,8 +43,23 @@ export default class Home extends React.Component {
           <Text>
             Location
           </Text>
-
         </View>
+        <View>
+          <Button
+            onPress={this.adding}
+            title="Add New Match"
+            color="#f44242"
+            accessibilityLabel="Learn more about this purple button"
+          />
+          <Button
+            onPress={this.adding}
+            title="My Matches"
+            style={styles.myMatches}
+            color="#f44242"
+            accessibilityLabel="Learn more about this purple button"
+          />
+        </View>
+
       </ScrollView>
     )
   }
@@ -54,7 +74,7 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     display: 'flex',
     // width: 120,
-     backgroundColor: 'blue',
+     backgroundColor: 'powderblue',
      left: '15%'
   },
   image: {
@@ -62,6 +82,9 @@ const styles = StyleSheet.create({
   height: 200,
   marginTop: 35,
   marginLeft: 150,
-  
+
+  },
+  myMatches: {
+    marginTop: 250
   }
 })
