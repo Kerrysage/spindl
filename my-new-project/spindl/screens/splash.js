@@ -10,6 +10,9 @@ import {
     View,
     TextInput
 } from 'react-native';
+import SignUpForm from '../components/SignUpForm';
+import SignInForm from '../components/SignInForm';
+
 
 //login
 export default class Splash extends React.Component {
@@ -25,24 +28,22 @@ export default class Splash extends React.Component {
 
     render () {
         return (
-            <View style={styles.container}>
-                {/* <Text style={styles.header}> Dream Date!</Text> */}
-                <Image 
-                style= {styles.images}
-                source={require('../assets/images/dd-logo.png')}
-                />
-                {/* <userStatus /> */}
-                <TextInput
-                    style={styles.signIn}
-                    placeholder="Username"
-                    onChangeText={(text) => this.setState({text})}
+            <ScrollView>
+                <View style={styles.container}>
+                    <Image 
+                    style= {styles.images}
+                    source={require('../assets/images/dd-logo.png')}
                     />
-                <Text style={styles.text}>
-                    {this.state.text}
-                </Text>
 
-            </View>
+                    
+                    {/* <userStatus /> */}
+                    <SignUpForm />
+                    <SignInForm />
+                </View>
             
+
+
+            </ScrollView>
         )
     }
 }

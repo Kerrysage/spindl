@@ -1,16 +1,17 @@
 import React from 'react';
 import {StyleSheet, Text, View, TextInput, TouchableOpacity} from 'react-native';
 
-export default class SignInForm extends React.Component {
+export default class SignUpForm extends React.Component {
     render() {
         return(
-            <View style={styles.SignInForm}>
-                <Text style={styles.header}>Sign In</Text>
+            <View style={styles.SignUpForm}>
+                <Text style={styles.header}>Sign Up</Text>
+                <TextInput style={styles.textInput} placeholder='Full Name' />
                 <TextInput style={styles.textInput} placeholder='Email' />
-                <TextInput style={styles.textInput} placeholder='Password' secureTextEntry={true}/>
+                <TextInput style={styles.textInput} placeholder='Password' />
 
                 <TouchableOpacity style={styles.button}>
-                    <Text style={styles.btnText}>Sign In</Text>
+                    <Text style={styles.btnText}>Sign Up</Text>
                 </TouchableOpacity>
             </View>
         )
@@ -18,7 +19,7 @@ export default class SignInForm extends React.Component {
 }
 
 const styles = StyleSheet.create({
-    SignInForm: {
+    SignUpForm: {
         alignSelf: 'stretch',
         marginBottom: 20
         
