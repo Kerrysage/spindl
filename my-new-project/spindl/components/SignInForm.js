@@ -12,6 +12,11 @@ export default class SignInForm extends React.Component {
                 <TouchableOpacity style={styles.button}>
                     <Text style={styles.btnText}>Sign In</Text>
                 </TouchableOpacity>
+                <Text 
+                    style={styles.link}
+                    onPress={() => LinkingIOS.openURL('http://google.com')}>
+                    Create New Account
+                </Text>
             </View>
         )
     }
@@ -21,7 +26,6 @@ const styles = StyleSheet.create({
     SignInForm: {
         alignSelf: 'stretch',
         marginBottom: 20
-        
     },
     header:{
         fontSize: 24,
@@ -44,6 +48,14 @@ const styles = StyleSheet.create({
         borderBottomColor: "#f8f8f8",
         borderBottomWidth: 1,
     },
+    link:{
+        color: '#579AD3',
+        fontSize: 16,
+        fontWeight: '600',
+        marginBottom: 20,
+        textAlign: 'center',
+        paddingTop: 20,
+    },
     button: {
         alignSelf: 'stretch',
         alignItems: 'center',
@@ -52,7 +64,8 @@ const styles = StyleSheet.create({
         marginTop: 30,
     },
     btnText: {
-        color: '#fff',
+        color: 'rgba(255, 255, 255, 0.8)',
+        fontSize: 16,
         fontWeight: 'bold'
     }
 

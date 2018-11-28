@@ -53,7 +53,8 @@ const styles = StyleSheet.create({
         marginTop: 30,
     },
     btnText: {
-        color: '#fff',
+        color: 'rgba(255, 255, 255, 0.8)',
+        fontSize: 12,
         fontWeight: 'bold'
     }
 
