@@ -11,6 +11,7 @@ const outdoorRoutes = require('./routes/outdoorRoutes')
 const nightlifeRoutes = require('./routes/nightlifeRoutes')
 const userRoutes = require('./routes/userRoutes')
 const authRoutes = require('./routes/auth')
+const choicesRoutes = require ('./routes/user_choicesRoutes')
 
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
@@ -42,6 +43,7 @@ app.use('/outdoor', outdoorRoutes)
 app.use('/nightlife', nightlifeRoutes)
 app.use('/users', userRoutes)
 app.use('/auth', authRoutes)
+app.use('/choices', choicesRoutes)
 
 
 app.use(notFound);
