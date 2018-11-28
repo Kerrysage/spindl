@@ -5,13 +5,14 @@ const saltRounds = 12
 
 const newUser = (req, res, next) => {
     const email = req.body.email
-    // return knex('user_profile')
-    //     .where('email', email)
-    //     .then(user => {
-    //         if(!user.length){
+    return knex('user_profile')
+        .where('email', email)
+        .then(user => {
+            if(!user.length){
+        console.log('yo')
                 const hashPassword = bcrypt.hashSync(req.body.password, saltRounds)
                 req.body.password =  hashPassword
-                knex('user_profile')
+                return knex('user_profile')
                     .insert(req.body)
                     .returning('*')
                     .then(newUser => {
@@ -20,15 +21,16 @@ const newUser = (req, res, next) => {
                         const token = jwt.sign(payload, process.env.TOKEN_SECRET)
                         res.json({token})
                     })
-            // } else {
-            //     res.json({error: 'Error: email already registered. Please enter a different email and try again'})
-            // }
-        // })
+                    .catch(err => console.log('Error:', err))
+            } else {
+                res.json({error: 'Error: email already registered. Please enter a different email and try again'})
+            }
+        })
 }
 
 const returningUser = (req, res, next) => {
         const email = req.body.email
-        knex('user_profile')
+        return knex('user_profile')
             .where('email', email)
             .then(user => {
                 if(!user.length){
