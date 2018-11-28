@@ -9,7 +9,7 @@ import splash from '../screens/splash';
 import SettingsScreen from '../screens/SettingsScreen';
 
 const QuestionaireStack = createStackNavigator({
-  Home: questionaire,
+  Home: Home,
 });
 
 QuestionaireStack.navigationOptions = {
