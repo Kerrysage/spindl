@@ -8,6 +8,7 @@ const movieRoutes = require('./routes/movieRoutes')
 const indoorRoutes = require('./routes/indoorRoutes')
 const outdoorRoutes = require('./routes/outdoorRoutes')
 const nightlifeRoutes = require('./routes/nightlifeRoutes')
+const userRoutes = require('./routes/userRoutes')
 
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
@@ -22,6 +23,7 @@ app.use('/movie', movieRoutes)
 app.use('/indoor', indoorRoutes)
 app.use('/outdoor', outdoorRoutes)
 app.use('/nightlife', nightlifeRoutes)
+app.use('/users', userRoutes)
 
 
 
