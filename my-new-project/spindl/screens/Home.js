@@ -25,7 +25,7 @@ export default class Home extends React.Component {
         <Image
          source={{uri:'https://placeimg.com/200/200/people'}}
          fadeDuration={0}
-         style={{width: 200, height: 200,marginTop: 35, marginLeft: 150}}/>
+         style={styles.image}/>
        </View>
 
         <View style={{marginLeft: 150}, styles.centerItem}>
@@ -55,6 +55,13 @@ const styles = StyleSheet.create({
     display: 'flex',
     // width: 120,
      backgroundColor: 'blue',
-     left: '40%'
+     left: '15%'
+  },
+  image: {
+  width: 200,
+  height: 200,
+  marginTop: 35,
+  marginLeft: 150,
+  
   }
 })
