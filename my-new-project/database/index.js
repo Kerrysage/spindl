@@ -4,20 +4,24 @@ let port = process.env.PORT || 3000
 const bodyParser = require('body-parser')
 const cors = require('cors')
 const foodRoutes = require('./routes/foodRoutes')
+const movieRoutes = require('./routes/movieRoutes')
+const indoorRoutes = require('./routes/indoorRoutes')
+const outdoorRoutes = require('./routes/outdoorRoutes')
+const nightlifeRoutes = require('./routes/nightlifeRoutes')
 
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 app.use(cors())
 
 app.get('/', (req, res, next) => {
-    res.json({message: "RRRAAAWRRRR"})
+    res.json({message: "RRRAAAWRRRR", food: `http://localhost:${port}/food`})
 })
 
 app.use('/food', foodRoutes)
-// app.use('/movie', movieRoutes)
-// app.use('/indoor', indoorRoutes)
-// app.use('/outdoor', outdoorRoutes)
-// app.use('/nightlife', nightlifeRoutes)
+app.use('/movie', movieRoutes)
+app.use('/indoor', indoorRoutes)
+app.use('/outdoor', outdoorRoutes)
+app.use('/nightlife', nightlifeRoutes)
 
 
 
@@ -46,4 +50,4 @@ function errorHandler(err, req, res, next) {
 }
 
 
-app.listen(port, () => console.log(`I got you on ${port}`))
+app.listen(port, () => console.log(`I got you on https://localhost:${port}`))
