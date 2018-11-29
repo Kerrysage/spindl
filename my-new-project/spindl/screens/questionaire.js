@@ -47,16 +47,33 @@ export default class Questionaire extends React.Component {
     });
   }
 
+  foodDrop(foodItems) {
+    if (foodItems !== undefined) {
+      // // console.log("error")
+      const testOf = foodItems.map((item) =>
+        // console.log(item.type)
+        <Picker.Item label={item.type} value={item.type} />
+      )
+
+        return(
+          //   <Picker.Item label={item.type} value={item.type} />
+          // <View>
+          testOf
+          // {/* </View> */}
+          // console.log(testOf)
+
+      )
+      // for (var i = 0; i < foodItems.length; i++) {
+      //   // console.log(foodItems[i].type);
+      //   const testOf =
+      // }
+    }
+  }
+
 
   render() {
-    // console.log(this.state.food);
-    var arr = []
-    // for (var i = 0; i < this.state.food.length; i++) {
-    //   console.log(this.state.food);
-    // }
-    // const foodDrop = this.state.food.map(item => {
-    //   return arr.push(item)
-    // })
+    const fD = this.state.food
+    // console.log(this.state);
     return (<ScrollView style={{
       flex: 3,
       display: 'flex',
@@ -79,7 +96,8 @@ export default class Questionaire extends React.Component {
 
       </View>
       <View>
-        <Text>Food</Text>
+        {/* <Text>Food</Text> */}
+        {this.foodDrop(fD)}
       </View>
       <View style={styles.submit}>
         <Picker
@@ -89,6 +107,7 @@ export default class Questionaire extends React.Component {
             this.setState({Food: itemValue})
           }>
           <Picker.Item enabled="false" label="" value="" />
+            {/* {this.foodDrop(fD)} */}
 
         </Picker>
         <Button title="Send It" onPress={this.clickMe}/>
