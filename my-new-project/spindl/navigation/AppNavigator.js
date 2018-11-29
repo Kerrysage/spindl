@@ -17,7 +17,6 @@ export default createSwitchNavigator(
     SignUp: SignUpPage,
     Matches: MatchPage,
     Questionaire: Questionaire
-    
   },
   {
     initialRouteName: "Home"
