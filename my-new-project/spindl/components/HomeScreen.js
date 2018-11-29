@@ -10,8 +10,14 @@ import {
     View,
 } from 'react-native';
 import { AsyncStorage } from "react-native"
-import {withNavigation} from 'react-navigation';
+import { withNavigation } from 'react-navigation';
 const jwtDecode = require('jwt-decode');
+
+function log(data) {
+    console.log(data);
+    return data;
+}
+
 class HomeScreen extends React.Component {
 
     state = {
@@ -20,69 +26,85 @@ class HomeScreen extends React.Component {
     }
 
     consoleLog = () => {
-        
+
         console.log(this.state)
     }
 
-    retrieveData = async () => {
-        try {
-            const value = await AsyncStorage.getItem('token');
-            if (value !== null) {
-                const decoded = jwtDecode(value)
-                return this.setState(
-                    () => {
-                        return {
-                            token: decoded
-                    }
-                }
-            )
-        }
-        } catch (error) {
-            console.log(error)
-        }
+    // retrieveToken = async () => {
+    //     try {
+    //       const value = await AsyncStorage.getItem('token');
+    //       if (value !== null) {
+    //         const decoded = jwtDecode(value)
+    //         return this.setState(
+    //             () => {
+    //                 return {
+    //                     token: decoded
+    //                 }
+    //             }
+    //         )
+    //       } else {
+    //           console.log('na fam')
+    //       }
+    //      } catch (error) {
+    //        console.log(error)
+    //      }
+    //   }
+
+    retrieveToken = () => {
+        if (this.state.token) return Promise.resolve(this.state.token)
+
+        return AsyncStorage.getItem('token')
+            .then(jwtDecode)
+            .then(token => {
+                this.setState(() => {
+                    return {token: token.id} 
+                })
+                return token.id;
+            })
     }
 
-    componentDidMount(){
-        this.retrieveData()
-        fetch(`https://dream-date.herokuapp.com/users${this.state.token.id}`,{
+    getData = (token) => {
+        return fetch(`https://dream-date.herokuapp.com/users/${token}`, {
             method: 'GET',
             mode: 'cors',
             headers: {
                 'Content-Type': 'application/json; charset=utf-8'
             },
-        }) 
-        .then(response => response.json())
-        .then(response => {
-            return this.setState(
-                () => {
-                    return {
-                        user: response
-                    }
-                }
-            )
         })
-        
+            .then(res => res.json())
+
+    }
+
+    componentDidMount() {
+        this.retrieveToken()
+            .then(this.getData)
+            .then(({ user }) => {
+                return this.setState({ user: user[0], error: null })
+            })
+            .catch(err => {
+                console.error(err)
+                this.setState({error: err.message})
+            })
+
     }
 
     render() {
-        return(
+        return (
             <View style={styles.HomeScreen}>
                 <View style={styles.headContainer}>
-                    {/* <View style={styles.imgContainer}> */}
-                        <Image 
-                        style={styles.img} 
-                        source={{uri:'https://placeimg.com/200/200/people'}}
-                        />
-                    {/* </View> */}
-                    <View style={styles.infoContainer}>
+                    <Image 
+                    style={styles.img} 
+                    source={{uri:'https://placeimg.com/200/200/people'}}
+                    />
+                <View style={styles.infoContainer}>
                         <Text style={styles.infoText}>
-                            Name
+                            Name: {this.state.user.name}
                         </Text>
                         <Text style={styles.infoText}>
-                            Age
+                            Age: {this.state.user.age}
                         </Text>
                         <Text style={styles.infoText}>
-                            Location
+                            Location: {this.state.user.location}
                         </Text>
                     </View>
                 </View>
@@ -100,7 +122,7 @@ class HomeScreen extends React.Component {
 }
 
 const styles = StyleSheet.create({
-    HomeScreen:{
+    HomeScreen: {
         alignSelf: 'stretch'
     },
     headContainer:{
@@ -130,22 +152,22 @@ const styles = StyleSheet.create({
     infoText:{
         fontSize: 16,
         color: '#fff',
-        paddingBottom:10,
+        paddingBottom: 10,
         paddingTop: 10,
         borderBottomColor: "#fff",
         borderBottomWidth: 1,
         textAlign: 'center'
     },
-    btnContainer:{
+    btnContainer: {
     },
-    button:{
+    button: {
         alignSelf: 'stretch',
         alignItems: 'center',
-        padding:20,
+        padding: 20,
         backgroundColor: '#ec4760',
         marginTop: 30,
     },
-    btnText:{
+    btnText: {
         color: 'rgba(255, 255, 255, 0.8)',
         fontSize: 16,
         fontWeight: 'bold'
