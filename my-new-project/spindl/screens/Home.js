@@ -24,6 +24,7 @@ class Home extends React.Component {
         console.log('ayyeee');
     }
 
+<<<<<<< HEAD
     render() {
     return(
         <ScrollView style={styles.scrollView}>
@@ -37,6 +38,41 @@ class Home extends React.Component {
         </ScrollView>
         )
     }
+=======
+        <View style={{marginLeft: 150}, styles.centerItem}>
+          <Text>
+            Name
+          </Text>
+          <Text>
+            Age
+          </Text>
+          <Text>
+            Location
+          </Text>
+        </View>
+        <View>
+          <Button
+            onPress={this.adding}
+            title="Add New Match"
+            color="#f44242"
+            accessibilityLabel="Learn more about this purple button"
+          />
+
+        </View>
+        <View>
+          <Button
+            onPress={this.adding}
+            title="My Matches"
+            style={styles.myMatches}
+            color="#f44242"
+            accessibilityLabel="Learn more about this purple button"
+          />
+        </View>
+
+      </ScrollView>
+    )
+  }
+>>>>>>> 5144e81d0d68bc28af4b42164f3f705273053c9e
 }
 
 const styles = StyleSheet.create({
