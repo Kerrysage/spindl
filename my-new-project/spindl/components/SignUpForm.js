@@ -2,6 +2,7 @@ import React from 'react';
 import RadioForm, {RadioButton, RadioButtonInput, RadioButtonLabel} from 'react-native-simple-radio-button';
 import {StyleSheet, Text, View, TextInput, TouchableOpacity} from 'react-native';
 import {withNavigation} from 'react-navigation';
+import { AsyncStorage } from "react-native"
 
 const age = [
     {label: 'Male', value: 'M'},
@@ -17,9 +18,18 @@ class SignUpForm extends React.Component {
         password: '',
         gender: ''
     }
+
+    storeData = async (token) => {
+        try {
+          await AsyncStorage.setItem(token);
+        } catch (error) {
+          console.log(error)
+        }
+      }
+
     signUp = () => {
         if((this.state.email !== '') && (this.state.password !== '')){
-            return fetch ('http://10.6.69.196:3000/auth/signup', {
+            return fetch ('https://dream-date.herokuapp.com/auth/signup', {
                 method: 'POST',
                 mode: 'cors',
                 headers: {
@@ -39,7 +49,8 @@ class SignUpForm extends React.Component {
                 if(response.error){
                     alert(response.error)
                 } else {
-                    return this.props.navigation.navigate('Profile')
+                    return this.storeData(response.token)
+                    .then( () => this.props.navigation.navigate('Profile'))
                 }
             })
         } else {
@@ -48,7 +59,6 @@ class SignUpForm extends React.Component {
     }
 
     render() {
-    console.log(this.state)
         return(
             <View style={styles.SignUpForm}>
                 <Text style={styles.header}>Sign Up</Text>

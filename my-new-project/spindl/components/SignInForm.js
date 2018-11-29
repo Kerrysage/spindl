@@ -1,7 +1,7 @@
 import React from 'react';
 import {StyleSheet, Text, View, TextInput, TouchableOpacity} from 'react-native';
 import {withNavigation} from 'react-navigation';
-
+import { AsyncStorage } from "react-native"
 class SignInForm extends React.Component {
     state = {
         email: '',
@@ -13,8 +13,17 @@ class SignInForm extends React.Component {
     getPassword = () => {
 
     }
+
+    storeData = async (token) => {
+        try {
+          await AsyncStorage.setItem('token', token);
+        } catch (error) {
+          console.log(error)
+        }
+    }
+
     signIn = () => {
-        return fetch ('http://10.6.69.196:3000/auth/login', {
+        return fetch ('https://dream-date.herokuapp.com/auth/login', {
             method: 'POST',
             mode: 'cors',
             headers: {
@@ -30,7 +39,10 @@ class SignInForm extends React.Component {
             if(response.error){
                 alert(response.error)
             } else {
-                this.props.navigation.navigate('Profile')
+                this.storeData(response.token)
+                .then(() => {
+                    return this.props.navigation.navigate('Profile')
+                })
             }
         })
     }
