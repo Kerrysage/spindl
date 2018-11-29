@@ -34,7 +34,7 @@ const returningUser = (req, res, next) => {
             .where('email', email)
             .then(user => {
                 if(!user.length){
-                res.json({error: 'Email not found, please enter a registered email.'})
+                res.status(404).json({error: "Please enter a valid email and try again."})
                 } else {
                     const hashPassword = user[0].password
                     const match = bcrypt.compareSync(req.body.password, hashPassword)
@@ -45,12 +45,12 @@ const returningUser = (req, res, next) => {
                         delete payload.password
                         const token = jwt.sign(payload, process.env.TOKEN_SECRET)
                         res.json({ token: token })
-                    } else { 
-                        res.json({error: 'Incorrect password, please try again'})
+                    } else {
+                        res.status(404).json({error: 'Incorrect password, please try again'})
                     }
                 }
             })
-            .catch(err => console.log('error', err))
+            .catch(err => console.log('This is catch error', err))
         }
     
 

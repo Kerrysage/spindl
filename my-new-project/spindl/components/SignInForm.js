@@ -14,7 +14,7 @@ class SignInForm extends React.Component {
 
     }
     signIn = () => {
-        fetch ('http://10.6.68.160:3000/auth/login', {
+        return fetch ('http://10.6.69.196:3000/auth/login', {
             method: 'POST',
             mode: 'cors',
             headers: {
@@ -26,11 +26,12 @@ class SignInForm extends React.Component {
             }) 
         }) 
         .then(response => {
-            this.props.navigation.navigate('Profile')
-            return response.json()
+            if(!response.ok){
+                alert('na fam')
+            } else {
+                this.props.navigation.navigate('Profile')
+            }
         })
-        
-
     }
     render() {
         return(
@@ -60,7 +61,7 @@ class SignInForm extends React.Component {
                 </TouchableOpacity>
                 <Text 
                     style={styles.link}
-                    onPress={() => LinkingIOS.openURL('http://google.com')}>
+                    onPress={() => console.log(this.state)}>
                     Create New Account
                 </Text>
             </View>
