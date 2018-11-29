@@ -21,7 +21,7 @@ class SignUpForm extends React.Component {
 
     storeData = async (token) => {
         try {
-          await AsyncStorage.setItem(token);
+          await AsyncStorage.setItem('token', token);
         } catch (error) {
           console.log(error)
         }
