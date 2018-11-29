@@ -25,7 +25,7 @@ export default class Questionaire extends React.Component {
   };
 
   clickMe = () => {
-    console.log(this.state.OutdoorSelected,this.state.IndoorSelected,this.state.FoodSelected,this.state.NightlifeSelected,this.state.MoviesSelected)
+    console.log(this.state.OutdoorSelected,this.state.IndoorSelected,this.state.FoodSelected,this.state.NightlifeSelected,this.state.MovieSelected)
   }
 
   async componentDidMount() {
