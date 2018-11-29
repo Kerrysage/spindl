@@ -50,7 +50,7 @@ class SignUpForm extends React.Component {
                     alert(response.error)
                 } else {
                     return this.storeData(response.token)
-                    .then( () => this.props.navigation.navigate('Profile'))
+                    .then( () => this.props.navigation.navigate('Questionaire'))
                 }
             })
         } else {

@@ -15,7 +15,8 @@ export default createSwitchNavigator(
     Home: splash,
     Profile: Home,
     SignUp: SignUpPage,
-    Matches: MatchPage
+    Matches: MatchPage,
+    Questionaire: Questionaire
     
   },
   {
