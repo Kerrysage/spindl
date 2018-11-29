@@ -1,7 +1,7 @@
 import React from 'react';
 import {StyleSheet, Text, View, TextInput, TouchableOpacity} from 'react-native';
 import {withNavigation} from 'react-navigation';
-
+import { AsyncStorage } from "react-native"
 class SignInForm extends React.Component {
     state = {
         email: '',
@@ -13,8 +13,17 @@ class SignInForm extends React.Component {
     getPassword = () => {
 
     }
+
+    storeData = async (token) => {
+        try {
+          await AsyncStorage.setItem('token', token);
+        } catch (error) {
+          console.log(error)
+        }
+    }
+
     signIn = () => {
-        fetch ('http://10.6.68.160:3000/auth/login', {
+        return fetch ('https://dream-date.herokuapp.com/auth/login', {
             method: 'POST',
             mode: 'cors',
             headers: {
@@ -25,9 +34,16 @@ class SignInForm extends React.Component {
                 'password': this.state.password
             }) 
         }) 
+        .then(response => response.json())
         .then(response => {
-            this.props.navigation.navigate('Profile')
-            return response.json()
+            if(response.error){
+                alert(response.error)
+            } else {
+                this.storeData(response.token)
+                .then(() => {
+                    return this.props.navigation.navigate('Profile')
+                })
+            }
         })
     }
     
@@ -61,11 +77,7 @@ class SignInForm extends React.Component {
                 <TouchableOpacity onPress={this.signIn} style={styles.button}>
                     <Text style={styles.btnText}>Sign In</Text>
                 </TouchableOpacity>
-                <Text 
-                    style={styles.link}
-                    onPress={this.signUp}>
-                    Create New Account
-                </Text>
+                    <Text style={styles.link} onPress={this.signUp}>Create New Account</Text>
             </View>
         )
     }

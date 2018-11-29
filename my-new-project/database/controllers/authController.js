@@ -9,7 +9,7 @@ const newUser = (req, res, next) => {
         .where('email', email)
         .then(user => {
             if(!user.length){
-        console.log('yo')
+        console.log('yo, bout to hash your password')
                 const hashPassword = bcrypt.hashSync(req.body.password, saltRounds)
                 req.body.password =  hashPassword
                 return knex('user_profile')
@@ -21,9 +21,12 @@ const newUser = (req, res, next) => {
                         const token = jwt.sign(payload, process.env.TOKEN_SECRET)
                         res.json({token})
                     })
-                    .catch(err => console.log('Error:', err))
+                    .catch(err => {
+                        console.log('Error:', err)
+                        return res.status(404).json({error: err})
+                    })
             } else {
-                res.json({error: 'Error: email already registered. Please enter a different email and try again'})
+                res.status(302).json({error: 'Email already registered. Please enter a different email and try again'})
             }
         })
 }
@@ -34,7 +37,7 @@ const returningUser = (req, res, next) => {
             .where('email', email)
             .then(user => {
                 if(!user.length){
-                res.json({error: 'Email not found, please enter a registered email.'})
+                res.status(404).json({error: "Please enter a valid email and try again."})
                 } else {
                     const hashPassword = user[0].password
                     const match = bcrypt.compareSync(req.body.password, hashPassword)
@@ -44,13 +47,16 @@ const returningUser = (req, res, next) => {
                         const payload = JSON.parse(JSON.stringify(user[0]))
                         delete payload.password
                         const token = jwt.sign(payload, process.env.TOKEN_SECRET)
-                        res.json({ token: token })
-                    } else { 
-                        res.json({error: 'Incorrect password, please try again'})
+                        res.json({ 
+                            token: token,
+                            user: payload
+                        })
+                    } else {
+                        res.status(404).json({error: 'Incorrect password, please try again'})
                     }
                 }
             })
-            .catch(err => console.log('error', err))
+            .catch(err => console.log('This is catch error', err))
         }
     
 

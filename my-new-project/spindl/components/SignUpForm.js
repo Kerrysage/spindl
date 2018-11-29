@@ -2,6 +2,7 @@ import React from 'react';
 import RadioForm, {RadioButton, RadioButtonInput, RadioButtonLabel} from 'react-native-simple-radio-button';
 import {StyleSheet, Text, View, TextInput, TouchableOpacity} from 'react-native';
 import {withNavigation} from 'react-navigation';
+import { AsyncStorage } from "react-native"
 
 const age = [
     {label: 'Male', value: 'M'},
@@ -13,33 +14,51 @@ class SignUpForm extends React.Component {
         name: '',
         email: '',
         location: '',
-        age: '',
+        age: 0,
         password: '',
         gender: ''
     }
+
+    storeData = async (token) => {
+        try {
+          await AsyncStorage.setItem('token', token);
+        } catch (error) {
+          console.log(error)
+        }
+      }
+
     signUp = () => {
-        return fetch ('http://10.6.67.156:3000/auth/signup', {
-            method: 'POST',
-            mode: 'cors',
-            headers: {
-                'Content-Type': 'Application/json; charset=utf-8'
-            },
-            body: JSON.stringify({
-                'name': this.state.name,
-                'email': this.state.email,
-                "gender": this.state.gender,
-                'location': this.state.location,
-                'age': this.state.age,
-                'password':this.state.password,
+        if((this.state.email !== '') && (this.state.password !== '')){
+            return fetch ('https://dream-date.herokuapp.com/auth/signup', {
+                method: 'POST',
+                mode: 'cors',
+                headers: {
+                    'Content-Type': 'Application/json; charset=utf-8'
+                },
+                body: JSON.stringify({
+                    'name': this.state.name,
+                    'email': this.state.email,
+                    "gender": this.state.gender,
+                    'location': this.state.location,
+                    'age': this.state.age,
+                    'password':this.state.password,
+                })
             })
-        })
-        .then(response => {
-            return this.props.navigation.navigate('Profile')
-        })
+            .then(response => response.json())
+            .then(response => {
+                if(response.error){
+                    alert(response.error)
+                } else {
+                    return this.storeData(response.token)
+                    .then( () => this.props.navigation.navigate('Questionaire'))
+                }
+            })
+        } else {
+            return alert('Please make sure all fields are filled out')
+        }
     }
 
     render() {
-    console.log(this.state)
         return(
             <View style={styles.SignUpForm}>
                 <Text style={styles.header}>Sign Up</Text>
