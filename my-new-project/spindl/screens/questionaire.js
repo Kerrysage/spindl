@@ -22,16 +22,13 @@ export default class Questionaire extends React.Component {
   };
 
   state = {
-    // food: null
   };
 
   clickMe = () => {
-    // console.log(this.state)
+    console.log(this.state.OutdoorSelected,this.state.IndoorSelected,this.state.FoodSelected,this.state.NightlifeSelected,this.state.MoviesSelected)
   }
 
   async componentDidMount() {
-    // this.testing()
-
     const foodResponse = await fetch("https://dream-date.herokuapp.com/food")
     const food = await foodResponse.json()
     this.setState({
@@ -65,28 +62,10 @@ export default class Questionaire extends React.Component {
           nightlife: nightlife.activity,
         }, function(){
         })
-    // console.log("movies for mounted", movie);
   }
 
 
-  //
-  // componentDidMount(){
-  //   fetch('https://dream-date.herokuapp.com/food')
-  //   .then((response) => response.json())
-  //   .then((data) => {
-  //
-  //     this.setState({
-  //       food: data.food,
-  //     }, function(){
-  //     });
-  //   })
-  //   .catch((error) =>{
-  //     console.error(error);
-  //   });
-  // }
-
   dropDownMenu(activity) {
-    console.log(activity);
     if (activity !== undefined) {
       var activityList = activity.map((item => {
         return <Picker.Item key={item.id} label={item.type} value={item.type}/>
@@ -96,6 +75,7 @@ export default class Questionaire extends React.Component {
   }
 
   render() {
+    // console.log(this.state.FoodSelected);
     return (<ScrollView style={{
         flex: 3,
         display: 'flex',
@@ -126,13 +106,13 @@ export default class Questionaire extends React.Component {
         <Text>Food</Text>
       </View>
       <View style={styles.submit}>
-        <Picker selectedValue={'Food'} style={{
+        <Picker selectedValue={this.state.FoodSelected} style={{
             height: 50,
             width: 200
-          }} onValueChange={(itemValue, itemIndex) => this.setState({Food: itemValue})
+          }} onValueChange={(itemValue, itemIndex) => this.setState({FoodSelected: itemValue})
 }>
           {/* <Picker.Item enabled="false" label="" value="" /> */}
-          {this.state.food && this.dropDownMenu(this.state.food)}
+          {this.dropDownMenu(this.state.food)}
         </Picker>
         <Button title="Send It" onPress={this.clickMe}/>
       </View>
@@ -141,10 +121,10 @@ export default class Questionaire extends React.Component {
         <Text>Movies</Text>
       </View>
       <View style={styles.submit}>
-        <Picker selectedValue={'Movies'} style={{
+        <Picker selectedValue={this.state.MovieSelected} style={{
             height: 50,
             width: 200
-          }} onValueChange={(itemValue, itemIndex) => this.setState({Movies: itemValue})
+          }} onValueChange={(itemValue, itemIndex) => this.setState({MoviesSelected: itemValue})
 }>
           { this.dropDownMenu(this.state.movie) }
         </Picker>
@@ -155,10 +135,10 @@ export default class Questionaire extends React.Component {
         <Text>Indoor</Text>
       </View>
       <View style={styles.submit}>
-        <Picker selectedValue={'Indoor'} style={{
+        <Picker selectedValue={this.state.IndoorSelected} style={{
             height: 50,
             width: 200
-          }} onValueChange={(itemValue, itemIndex) => this.setState({Indoor: itemValue})
+          }} onValueChange={(itemValue, itemIndex) => this.setState({IndoorSelected: itemValue})
 }>
           { this.dropDownMenu(this.state.indoor) }
         </Picker>
@@ -169,10 +149,10 @@ export default class Questionaire extends React.Component {
         <Text>Outdoor</Text>
       </View>
       <View style={styles.submit}>
-        <Picker selectedValue={'Outdoor'} style={{
+        <Picker selectedValue={this.state.OutdoorSelected} style={{
             height: 50,
             width: 200
-          }} onValueChange={(itemValue, itemIndex) => this.setState({Outdoor: itemValue})
+          }} onValueChange={(itemValue, itemIndex) => this.setState({OutdoorSelected: itemValue})
 }>
           { this.dropDownMenu(this.state.outdoor) }
         </Picker>
@@ -183,17 +163,17 @@ export default class Questionaire extends React.Component {
         <Text>Nighlife</Text>
       </View>
       <View style={styles.submitFlex}>
-        <Picker selectedValue={'Nightlife'} style={{
+        <Picker selectedValue={this.state.NightlifeSelected} style={{
             height: 50,
             width: 200
-          }} onValueChange={(itemValue, itemIndex) => this.setState({Nightlife: itemValue})
+          }} onValueChange={(itemValue, itemIndex) => this.setState({NightlifeSelected: itemValue})
 }>
           { this.dropDownMenu(this.state.nightlife) }
         </Picker>
         <Button title="Send It" onPress={this.clickMe}/>
       </View>
-      {/* </View> */}
     </ScrollView>)
+
   }
 }
 
