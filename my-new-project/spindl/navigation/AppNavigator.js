@@ -2,6 +2,7 @@ import React from 'react';
 import { createSwitchNavigator } from 'react-navigation';
 import Home from '../screens/Home';
 
+import SignUpPage from '../screens/SignUpPage';
 import MainTabNavigator from './MainTabNavigator';
 import splash from '../screens/splash';
 
@@ -10,7 +11,9 @@ export default createSwitchNavigator(
   // Read more at https://reactnavigation.org/docs/en/auth-flow.html
   {
     Home: splash,
-    Profile: Home
+    Profile: Home,
+    SignUp: SignUpPage
+
   },
   {
     initialRouteName: "Home"
