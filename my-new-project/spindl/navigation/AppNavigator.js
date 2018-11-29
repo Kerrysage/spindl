@@ -16,6 +16,6 @@ export default createSwitchNavigator(
     
   },
   {
-    initialRouteName: "Profile"
+    initialRouteName: "Home"
   }
 );

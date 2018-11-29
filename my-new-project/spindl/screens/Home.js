@@ -11,9 +11,11 @@ import {
 } from 'react-native';
 import { WebBrowser } from 'expo';
 import { MonoText } from '../components/StyledText';
+import {withNavigation} from 'react-navigation';
+
 import HomeScreen from '../components/HomeScreen';
 
-export default class Home extends React.Component {
+class Home extends React.Component {
     static navigationOptions = {
         header: null,
     };
@@ -139,3 +141,4 @@ const styles = StyleSheet.create({
 // })
 
 
+export default withNavigation(Home)
