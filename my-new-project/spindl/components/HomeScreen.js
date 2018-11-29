@@ -22,7 +22,8 @@ class HomeScreen extends React.Component {
 
     state = {
         token: '',
-        user: {}
+        user: {},
+        choices: {}
     }
 
     consoleLog = () => {
@@ -75,6 +76,17 @@ class HomeScreen extends React.Component {
 
     }
 
+    getChoices = (token) => {
+        return fetch(`https://dream-date.herokuapp.com/choices/${token}`, {
+            method: 'GET',
+            mode: 'cors',
+            headers: {
+                'Content-Type': 'application/json; charset=utf-8'
+            },
+        })
+        .then(res => res.json())
+    }
+
     componentDidMount() {
         this.retrieveToken()
             .then(this.getData)
@@ -105,6 +117,7 @@ class HomeScreen extends React.Component {
                         </Text>
                         <Text style={styles.infoText}>
                             Location: {this.state.user.location}
+                            Choices: {this.state.choices.user_id}
                         </Text>
                     </View>
                 </View>
