@@ -75,21 +75,6 @@ export default class Questionaire extends React.Component {
   }
 
   render() {
-<<<<<<< HEAD
-    return (
-    <ScrollView style={{
-      flex: 3, 
-      display: 'flex',
-      flexDirection: 'column'}}>
-
-        <Image
-          source={{uri:'https://placeimg.com/200/200/people'}}
-          fadeDuration={0}
-          style={{width: 200, height: 200,marginTop: 35, marginLeft: 25}}
-          />
-
-      <View style={styles.profile}>
-=======
     // console.log(this.state.FoodSelected);
     return (<ScrollView style={{
         flex: 3,
@@ -105,7 +90,6 @@ export default class Questionaire extends React.Component {
           marginLeft: 25
         }}/>
       <View >
->>>>>>> 5144e81d0d68bc28af4b42164f3f705273053c9e
         <Text style={styles.profileInfo}>
           Name
         </Text>
@@ -117,12 +101,9 @@ export default class Questionaire extends React.Component {
         </Text>
       </View>
 
-<<<<<<< HEAD
-=======
       <View>
         <Text>Food</Text>
       </View>
->>>>>>> 5144e81d0d68bc28af4b42164f3f705273053c9e
       <View style={styles.submit}>
         <Picker selectedValue={this.state.FoodSelected} style={{
             height: 50,
@@ -135,12 +116,9 @@ export default class Questionaire extends React.Component {
         <Button title="Send It" onPress={this.clickMe}/>
       </View>
 
-<<<<<<< HEAD
-=======
       <View>
         <Text>Movies</Text>
       </View>
->>>>>>> 5144e81d0d68bc28af4b42164f3f705273053c9e
       <View style={styles.submit}>
         <Picker selectedValue={this.state.MovieSelected} style={{
             height: 50,
@@ -156,36 +134,20 @@ export default class Questionaire extends React.Component {
         <Text>Indoor</Text>
       </View>
       <View style={styles.submit}>
-<<<<<<< HEAD
-
-        <Picker selectedValue={'Indoor'} style={{
-            height: 50,
-            width: 200
-          }} onValueChange={(itemValue, itemIndex) => this.setState({Indoor: itemValue})
-        }>
-          <Picker.Item label="Indoor" value=""/>
-          <Picker.Item label="test" value="test"/>
-          <Picker.Item label="test2" value="test2"/>
-          <Picker.Item label="test3" value="test3"/>
-=======
         <Picker selectedValue={this.state.IndoorSelected} style={{
             height: 50,
             width: 200
           }} onValueChange={(itemValue, itemIndex) => this.setState({IndoorSelected: itemValue})
 }>
           { this.dropDownMenu(this.state.indoor) }
->>>>>>> 5144e81d0d68bc28af4b42164f3f705273053c9e
         </Picker>
     
         <Button title="Send It" onPress={this.clickMe}/>
       </View>
 
-<<<<<<< HEAD
-=======
       <View>
         <Text>Outdoor</Text>
       </View>
->>>>>>> 5144e81d0d68bc28af4b42164f3f705273053c9e
       <View style={styles.submit}>
         <Picker selectedValue={this.state.OutdoorSelected} style={{
             height: 50,
@@ -196,14 +158,10 @@ export default class Questionaire extends React.Component {
         </Picker>
         <Button title="Send It" onPress={this.clickMe}/>
       </View>
-<<<<<<< HEAD
-      
-=======
 
       <View>
         <Text>Nighlife</Text>
       </View>
->>>>>>> 5144e81d0d68bc28af4b42164f3f705273053c9e
       <View style={styles.submitFlex}>
         <Picker selectedValue={this.state.NightlifeSelected} style={{
             height: 50,
