@@ -26,31 +26,6 @@ class HomeScreen extends React.Component {
         choices: {}
     }
 
-    consoleLog = () => {
-
-        console.log(this.state)
-    }
-
-    // retrieveToken = async () => {
-    //     try {
-    //       const value = await AsyncStorage.getItem('token');
-    //       if (value !== null) {
-    //         const decoded = jwtDecode(value)
-    //         return this.setState(
-    //             () => {
-    //                 return {
-    //                     token: decoded
-    //                 }
-    //             }
-    //         )
-    //       } else {
-    //           console.log('na fam')
-    //       }
-    //      } catch (error) {
-    //        console.log(error)
-    //      }
-    //   }
-
     retrieveToken = () => {
         if (this.state.token) return Promise.resolve(this.state.token)
 
@@ -73,7 +48,6 @@ class HomeScreen extends React.Component {
             },
         })
             .then(res => res.json())
-
     }
 
     getChoices = (token) => {
@@ -97,7 +71,10 @@ class HomeScreen extends React.Component {
                 console.error(err)
                 this.setState({error: err.message})
             })
+    }
 
+    matches = () => {
+        this.props.navigation.navigate('Matches')
     }
 
     render() {
@@ -122,10 +99,10 @@ class HomeScreen extends React.Component {
                     </View>
                 </View>
                 <View style={styles.btnContainer}>
-                    <TouchableOpacity onPress={this.consoleLog} style={styles.button}>
+                    <TouchableOpacity  style={styles.button}>
                         <Text style={styles.btnText}>Add New Match</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.button}>
+                    <TouchableOpacity style={styles.button} onPress={this.matches}>
                         <Text style={styles.btnText}>My Matches</Text>
                     </TouchableOpacity>
                 </View>
@@ -142,9 +119,11 @@ const styles = StyleSheet.create({
         flex: 1,
         flexDirection: 'row',
         justifyContent: 'space-around',
-        borderWidth: 2,
-        borderColor: "#fff",
-        padding:10,
+        borderTopWidth: 5,
+        borderTopColor: "#fff",
+        borderBottomColor: '#fff',
+        borderBottomWidth: 5,
+        padding: 15,
         marginTop: 20
     },
     imgContainer:{  
@@ -172,12 +151,13 @@ const styles = StyleSheet.create({
         textAlign: 'center'
     },
     btnContainer: {
+        marginTop: 10
     },
     button: {
         alignSelf: 'stretch',
         alignItems: 'center',
         padding: 20,
-        backgroundColor: '#ec4760',
+        backgroundColor: '#f22048',
         marginTop: 30,
     },
     btnText: {

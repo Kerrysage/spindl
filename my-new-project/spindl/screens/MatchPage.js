@@ -13,9 +13,9 @@ import { WebBrowser } from 'expo';
 import { MonoText } from '../components/StyledText';
 import {withNavigation} from 'react-navigation';
 
-import HomeScreen from '../components/HomeScreen';
+import Matches from '../components/Matches';
 
-class Home extends React.Component {
+class MatchPage extends React.Component {
     static navigationOptions = {
         header: null,
     };
@@ -32,7 +32,7 @@ class Home extends React.Component {
                         style= {styles.images}
                         source={require('../assets/images/dd-logo.png')}
                     />
-                <HomeScreen />
+                <Matches />
             </View>
         </ScrollView>
         )
@@ -59,5 +59,4 @@ const styles = StyleSheet.create({
     }
 })
 
-
-export default withNavigation(Home)
+export default withNavigation(MatchPage)
