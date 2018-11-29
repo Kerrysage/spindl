@@ -61,11 +61,7 @@ class SignInForm extends React.Component {
                 <TouchableOpacity onPress={this.signIn} style={styles.button}>
                     <Text style={styles.btnText}>Sign In</Text>
                 </TouchableOpacity>
-                <Text 
-                    style={styles.link}
-                    onPress={this.signUp}>
-                    Create New Account
-                </Text>
+                    <Text style={styles.link} onPress={this.signUp}>Create New Account</Text>
             </View>
         )
     }

@@ -13,9 +13,9 @@ export default createSwitchNavigator(
     Home: splash,
     Profile: Home,
     SignUp: SignUpPage
-
+    
   },
   {
-    initialRouteName: "Home"
+    initialRouteName: "Profile"
   }
 );
