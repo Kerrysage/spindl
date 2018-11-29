@@ -28,6 +28,10 @@ class Home extends React.Component {
     return(
         <ScrollView style={styles.scrollView}>
             <View style={styles.container}>
+                    <Image 
+                        style= {styles.images}
+                        source={require('../assets/images/dd-logo.png')}
+                    />
                 <HomeScreen />
             </View>
         </ScrollView>
@@ -46,6 +50,12 @@ const styles = StyleSheet.create({
         paddingTop: 40,
         flexDirection: 'column',
         alignItems: 'center',
+    },
+    images:{
+        height: 50,
+        width: 100,
+        paddingTop: 50,
+        alignItems: 'center'
     }
 })
 
