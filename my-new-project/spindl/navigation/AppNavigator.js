@@ -12,16 +12,11 @@ export default createSwitchNavigator(
   // You could add another route here for authentication.
   // Read more at https://reactnavigation.org/docs/en/auth-flow.html
   {
-<<<<<<< HEAD
     Home: splash,
     Profile: Home,
     SignUp: SignUpPage,
-    Matches: MatchPage
-    
-=======
-    Home: Questionaire,
-    Profile: Home
->>>>>>> 5144e81d0d68bc28af4b42164f3f705273053c9e
+    Matches: MatchPage,
+    Questionaire: Questionaire
   },
   {
     initialRouteName: "Home"
