@@ -11,7 +11,6 @@ import {
   View
 } from 'react-native';
 import {WebBrowser} from 'expo';
-
 import {MonoText} from '../components/StyledText';
 
 // import ModalDropdown from 'react-native-modal-dropdown';
