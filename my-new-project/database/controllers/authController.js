@@ -9,7 +9,7 @@ const newUser = (req, res, next) => {
         .where('email', email)
         .then(user => {
             if(!user.length){
-        console.log('yo')
+        console.log('yo, bout to hash your password')
                 const hashPassword = bcrypt.hashSync(req.body.password, saltRounds)
                 req.body.password =  hashPassword
                 return knex('user_profile')
@@ -21,9 +21,12 @@ const newUser = (req, res, next) => {
                         const token = jwt.sign(payload, process.env.TOKEN_SECRET)
                         res.json({token})
                     })
-                    .catch(err => console.log('Error:', err))
+                    .catch(err => {
+                        console.log('Error:', err)
+                        return res.status(404).json({error: err})
+                    })
             } else {
-                res.json({error: 'Error: email already registered. Please enter a different email and try again'})
+                res.status(302).json({error: 'Error: email already registered. Please enter a different email and try again'})
             }
         })
 }
