@@ -21,57 +21,94 @@ export default class Questionaire extends React.Component {
     header: null
   };
 
-    state = {
-      // food: null
-    };
+  state = {
+    // food: null
+  };
 
   clickMe = () => {
     // console.log(this.state)
-  };
-
-
-  componentDidMount(){
-    fetch('https://dream-date.herokuapp.com/food')
-    .then((response) => response.json())
-    .then((data) => {
-      // console.log(data.food[3].type)
-      this.setState({
-        food: data.food,
-      }, function(){
-      });
-      // console.log(this.state);
-    })
-    .catch((error) =>{
-      console.error(error);
-      // console.log('error');
-    });
   }
 
-  foodDrop(foodItems) {
-    if (foodItems !== undefined) {
-      // console.log(foodItems);
-      var testI = foodItems.map((item => {
-        return <Picker.Item label={item.type} value={item.type} />
+  async componentDidMount() {
+    // this.testing()
+
+    const foodResponse = await fetch("https://dream-date.herokuapp.com/food")
+    const food = await foodResponse.json()
+    this.setState({
+          food: food.food,
+        }, function(){
+        })
+    const movieResponse = await fetch("https://dream-date.herokuapp.com/movie")
+    const movie = await movieResponse.json()
+    this.setState({
+          movie: movie.genre,
+        }, function(){
+        })
+
+    const indoorResponse = await fetch("https://dream-date.herokuapp.com/indoor")
+    const indoor = await indoorResponse.json()
+    this.setState({
+          indoor: indoor.activity,
+        }, function(){
+        })
+
+    const outdoorResponse = await fetch("https://dream-date.herokuapp.com/outdoor")
+    const outdoor = await outdoorResponse.json()
+    this.setState({
+          outdoor: outdoor.activity,
+        }, function(){
+        })
+
+    const nightlifeResponse = await fetch("https://dream-date.herokuapp.com/nightlife")
+    const nightlife = await nightlifeResponse.json()
+    this.setState({
+          nightlife: nightlife.activity,
+        }, function(){
+        })
+    // console.log("movies for mounted", movie);
+  }
+
+
+  //
+  // componentDidMount(){
+  //   fetch('https://dream-date.herokuapp.com/food')
+  //   .then((response) => response.json())
+  //   .then((data) => {
+  //
+  //     this.setState({
+  //       food: data.food,
+  //     }, function(){
+  //     });
+  //   })
+  //   .catch((error) =>{
+  //     console.error(error);
+  //   });
+  // }
+
+  dropDownMenu(activity) {
+    console.log(activity);
+    if (activity !== undefined) {
+      var activityList = activity.map((item => {
+        return <Picker.Item key={item.id} label={item.type} value={item.type}/>
       }))
+      return (activityList)
     }
-    return(
-      testI
-    )
   }
-
 
   render() {
-    const fD = this.state.food
-    // console.log(this.state.food);
     return (<ScrollView style={{
-      flex: 3,
-      display: 'flex',
-      flexDirection: 'column'}}>
-        <Image
-          source={{uri:'https://placeimg.com/200/200/people'}}
-          fadeDuration={0}
-          style={{width: 200, height: 200,marginTop: 35, marginLeft: 25}}
-          />
+        flex: 3,
+        display: 'flex',
+        flexDirection: 'column'
+      }}>
+      <Image source={{
+          uri: 'https://placeimg.com/200/200/people'
+        }} fadeDuration={0} style={{
+          width: 200,
+          height: 200,
+          marginTop: 35,
+          marginLeft: 25
+        }}/>
       <View >
         <Text style={styles.profileInfo}>
           Name
@@ -84,35 +121,38 @@ export default class Questionaire extends React.Component {
         </Text>
 
       </View>
-      <View>
-        {/* <Text>Food</Text> */}
-      </View>
-      <View style={styles.submit}>
-        <Picker
-          selectedValue={'Food'}
-          style={ {height: 50, width: 200}}
-          onValueChange={(itemValue, itemIndex) =>
-            this.setState({Food: itemValue})
-          }>
-          {/* <Picker.Item enabled="false" label="" value="" /> */}
-            {this.foodDrop(this.state.food)}
 
+      <View>
+        <Text>Food</Text>
+      </View>
+      <View style={styles.submit}>
+        <Picker selectedValue={'Food'} style={{
+            height: 50,
+            width: 200
+          }} onValueChange={(itemValue, itemIndex) => this.setState({Food: itemValue})
+}>
+          {/* <Picker.Item enabled="false" label="" value="" /> */}
+          {this.state.food && this.dropDownMenu(this.state.food)}
         </Picker>
         <Button title="Send It" onPress={this.clickMe}/>
       </View>
+
+      <View>
+        <Text>Movies</Text>
+      </View>
       <View style={styles.submit}>
-        <Picker
-          selectedValue={'Movies'}
-          style={ {height: 50, width: 200}}
-          onValueChange={(itemValue, itemIndex) =>
-            this.setState({Movies: itemValue})
-          }>
-          <Picker.Item label="Movies" value="" />
-          <Picker.Item label="test" value="test" />
-          <Picker.Item label="test2" value="test2" />
-          <Picker.Item label="test3" value="test3" />
+        <Picker selectedValue={'Movies'} style={{
+            height: 50,
+            width: 200
+          }} onValueChange={(itemValue, itemIndex) => this.setState({Movies: itemValue})
+}>
+          { this.dropDownMenu(this.state.movie) }
         </Picker>
         <Button title="Send It" onPress={this.clickMe}/>
+      </View>
+
+      <View>
+        <Text>Indoor</Text>
       </View>
       <View style={styles.submit}>
         <Picker selectedValue={'Indoor'} style={{
@@ -120,38 +160,35 @@ export default class Questionaire extends React.Component {
             width: 200
           }} onValueChange={(itemValue, itemIndex) => this.setState({Indoor: itemValue})
 }>
-          <Picker.Item label="Indoor" value=""/>
-          <Picker.Item label="test" value="test"/>
-          <Picker.Item label="test2" value="test2"/>
-          <Picker.Item label="test3" value="test3"/>
+          { this.dropDownMenu(this.state.indoor) }
         </Picker>
         <Button title="Send It" onPress={this.clickMe}/>
+      </View>
+
+      <View>
+        <Text>Outdoor</Text>
       </View>
       <View style={styles.submit}>
-        <Picker
-          selectedValue={'Outdoor'}
-          style={ {height: 50, width: 200}}
-          onValueChange={(itemValue, itemIndex) =>
-            this.setState({Outdoor: itemValue})
-          }>
-          <Picker.Item label="Outdoor" value="" />
-          <Picker.Item label="test" value="test" />
-          <Picker.Item label="test2" value="test2" />
-          <Picker.Item label="test3" value="test3" />
+        <Picker selectedValue={'Outdoor'} style={{
+            height: 50,
+            width: 200
+          }} onValueChange={(itemValue, itemIndex) => this.setState({Outdoor: itemValue})
+}>
+          { this.dropDownMenu(this.state.outdoor) }
         </Picker>
         <Button title="Send It" onPress={this.clickMe}/>
       </View>
+
+      <View>
+        <Text>Nighlife</Text>
+      </View>
       <View style={styles.submitFlex}>
-        <Picker
-          selectedValue={'Nightlife'}
-          style={ {height: 50, width: 200}}
-          onValueChange={(itemValue, itemIndex) =>
-            this.setState({Nightlife: itemValue})
-          }>
-          <Picker.Item label="Nightlife" value="" />
-          <Picker.Item label="test" value="test" />
-          <Picker.Item label="test2" value="test2" />
-          <Picker.Item label="test3" value="test3" />
+        <Picker selectedValue={'Nightlife'} style={{
+            height: 50,
+            width: 200
+          }} onValueChange={(itemValue, itemIndex) => this.setState({Nightlife: itemValue})
+}>
+          { this.dropDownMenu(this.state.nightlife) }
         </Picker>
         <Button title="Send It" onPress={this.clickMe}/>
       </View>
@@ -161,36 +198,36 @@ export default class Questionaire extends React.Component {
 }
 
 const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      backgroundColor: '#fff',
-      flexDirection: 'column'
-    },
-    profile: {
-      marginTop: 35,
-      width: 100,
-      height: 50,
-      backgroundColor: 'powderblue',
-      marginLeft: 30
-    },
-    profileInfo: {
-      width: 100,
-      height: 50,
-      backgroundColor: 'powderblue',
-      marginLeft: 30
-    },
-    outside: {
-      display: 'flex',
-      flexDirection: 'column'
-    },
-    submit: {
-      // width: 100
-    },
-    submitFlex: {
-      display: 'flex',
-      flexDirection: 'row'
-    },
-    contentContainer: {
-      paddingVertical: 20
-}
-  })
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    flexDirection: 'column'
+  },
+  profile: {
+    marginTop: 35,
+    width: 100,
+    height: 50,
+    backgroundColor: 'powderblue',
+    marginLeft: 30
+  },
+  profileInfo: {
+    width: 100,
+    height: 50,
+    backgroundColor: 'powderblue',
+    marginLeft: 30
+  },
+  outside: {
+    display: 'flex',
+    flexDirection: 'column'
+  },
+  submit: {
+    // width: 100
+  },
+  submitFlex: {
+    display: 'flex',
+    flexDirection: 'row'
+  },
+  contentContainer: {
+    paddingVertical: 20
+  }
+})
