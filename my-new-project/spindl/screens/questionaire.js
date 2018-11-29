@@ -31,7 +31,7 @@ export default class Questionaire extends React.Component {
 
 
   componentDidMount(){
-    fetch('http://10.6.69.51:3000/food')
+    fetch('https://dream-date.herokuapp.com/food')
     .then((response) => response.json())
     .then((data) => {
       // console.log(data.food[3].type)
@@ -49,31 +49,20 @@ export default class Questionaire extends React.Component {
 
   foodDrop(foodItems) {
     if (foodItems !== undefined) {
-      // // console.log("error")
-      const testOf = foodItems.map((item) =>
-        // console.log(item.type)
-        <Picker.Item label={item.type} value={item.type} />
-      )
-
-        return(
-          //   <Picker.Item label={item.type} value={item.type} />
-          // <View>
-          testOf
-          // {/* </View> */}
-          // console.log(testOf)
-
-      )
-      // for (var i = 0; i < foodItems.length; i++) {
-      //   // console.log(foodItems[i].type);
-      //   const testOf =
-      // }
+      // console.log(foodItems);
+      var testI = foodItems.map((item => {
+        return <Picker.Item label={item.type} value={item.type} />
+      }))
     }
+    return(
+      testI
+    )
   }
 
 
   render() {
     const fD = this.state.food
-    // console.log(this.state);
+    // console.log(this.state.food);
     return (<ScrollView style={{
       flex: 3,
       display: 'flex',
@@ -83,7 +72,7 @@ export default class Questionaire extends React.Component {
           fadeDuration={0}
           style={{width: 200, height: 200,marginTop: 35, marginLeft: 25}}
           />
-      <View style={styles.profile}>
+      <View >
         <Text style={styles.profileInfo}>
           Name
         </Text>
@@ -97,7 +86,6 @@ export default class Questionaire extends React.Component {
       </View>
       <View>
         {/* <Text>Food</Text> */}
-        {this.foodDrop(fD)}
       </View>
       <View style={styles.submit}>
         <Picker
@@ -106,8 +94,8 @@ export default class Questionaire extends React.Component {
           onValueChange={(itemValue, itemIndex) =>
             this.setState({Food: itemValue})
           }>
-          <Picker.Item enabled="false" label="" value="" />
-            {/* {this.foodDrop(fD)} */}
+          {/* <Picker.Item enabled="false" label="" value="" /> */}
+            {this.foodDrop(this.state.food)}
 
         </Picker>
         <Button title="Send It" onPress={this.clickMe}/>
