@@ -33,6 +33,11 @@ class SignInForm extends React.Component {
             }
         })
     }
+    
+    signUp = () => {
+            this.props.navigation.navigate('SignUp')
+    }
+
     render() {
         return(
             <View style={styles.SignInForm}>
@@ -61,7 +66,7 @@ class SignInForm extends React.Component {
                 </TouchableOpacity>
                 <Text 
                     style={styles.link}
-                    onPress={() => console.log(this.state)}>
+                    onPress={this.signUp}>
                     Create New Account
                 </Text>
             </View>
