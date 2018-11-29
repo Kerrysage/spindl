@@ -26,7 +26,7 @@ const newUser = (req, res, next) => {
                         return res.status(404).json({error: err})
                     })
             } else {
-                res.status(302).json({error: 'Error: email already registered. Please enter a different email and try again'})
+                res.status(302).json({error: 'Email already registered. Please enter a different email and try again'})
             }
         })
 }
@@ -47,7 +47,10 @@ const returningUser = (req, res, next) => {
                         const payload = JSON.parse(JSON.stringify(user[0]))
                         delete payload.password
                         const token = jwt.sign(payload, process.env.TOKEN_SECRET)
-                        res.json({ token: token })
+                        res.json({ 
+                            token: token,
+                            user: payload
+                        })
                     } else {
                         res.status(404).json({error: 'Incorrect password, please try again'})
                     }

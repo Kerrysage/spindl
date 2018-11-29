@@ -34,14 +34,11 @@ class SignUpForm extends React.Component {
                     'password':this.state.password,
                 })
             })
+            .then(response => response.json())
             .then(response => {
-                console.log(response)
-                if(response.status == 302){
-                    alert('Please enter a new Email.')
-                } else if(response.status == 400) {
-                    alert('Please make sure all fields are filled out.')
-                }
-                else {
+                if(response.error){
+                    alert(response.error)
+                } else {
                     return this.props.navigation.navigate('Profile')
                 }
             })

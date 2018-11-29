@@ -25,9 +25,10 @@ class SignInForm extends React.Component {
                 'password': this.state.password
             }) 
         }) 
+        .then(response => response.json())
         .then(response => {
-            if(!response.ok){
-                alert('na fam')
+            if(response.error){
+                alert(response.error)
             } else {
                 this.props.navigation.navigate('Profile')
             }
