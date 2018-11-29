@@ -13,9 +13,9 @@ import { WebBrowser } from 'expo';
 import { MonoText } from '../components/StyledText';
 import {withNavigation} from 'react-navigation';
 
-import HomeScreen from '../components/HomeScreen';
+import Matches from '../components/Matches';
 
-class Home extends React.Component {
+class MatchPage extends React.Component {
     static navigationOptions = {
         header: null,
     };
@@ -24,7 +24,6 @@ class Home extends React.Component {
         console.log('ayyeee');
     }
 
-<<<<<<< HEAD
     render() {
     return(
         <ScrollView style={styles.scrollView}>
@@ -33,46 +32,11 @@ class Home extends React.Component {
                         style= {styles.images}
                         source={require('../assets/images/dd-logo.png')}
                     />
-                <HomeScreen />
+                <Matches />
             </View>
         </ScrollView>
         )
     }
-=======
-        <View style={{marginLeft: 150}, styles.centerItem}>
-          <Text>
-            Name
-          </Text>
-          <Text>
-            Age
-          </Text>
-          <Text>
-            Location
-          </Text>
-        </View>
-        <View>
-          <Button
-            onPress={this.adding}
-            title="Add New Match"
-            color="#f44242"
-            accessibilityLabel="Learn more about this purple button"
-          />
-
-        </View>
-        <View>
-          <Button
-            onPress={this.adding}
-            title="My Matches"
-            style={styles.myMatches}
-            color="#f44242"
-            accessibilityLabel="Learn more about this purple button"
-          />
-        </View>
-
-      </ScrollView>
-    )
-  }
->>>>>>> 5144e81d0d68bc28af4b42164f3f705273053c9e
 }
 
 const styles = StyleSheet.create({
@@ -95,5 +59,4 @@ const styles = StyleSheet.create({
     }
 })
 
-
-export default withNavigation(Home)
+export default withNavigation(MatchPage)
