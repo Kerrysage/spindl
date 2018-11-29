@@ -94,7 +94,6 @@ class HomeScreen extends React.Component {
                         </Text>
                         <Text style={styles.infoText}>
                             Location: {this.state.user.location}
-                            Choices: {this.state.choices.user_id}
                         </Text>
                     </View>
                 </View>
