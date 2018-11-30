@@ -94,8 +94,6 @@ render() {
         </View>
     </View>
 
-
-
     <Text style={styles.titles}>Food</Text>
     <View style={styles.pickerContainer}>
         <Picker 
@@ -107,7 +105,9 @@ render() {
             {/* <Picker.Item enabled="false" label="" value="" /> */}
             {this.dropDownMenu(this.state.food)}
         </Picker>
-        <Button title="Send It" onPress={this.clickMe}/>
+        <TouchableOpacity style={styles.button} onPress={this.clickMe}> 
+            <Text style={styles.btnText}>Send It</Text>
+        </TouchableOpacity>
     </View>
 
     <View style={styles.titlesContainer}>
@@ -137,7 +137,7 @@ render() {
             { this.dropDownMenu(this.state.indoor) }
         </Picker>
     
-        <Button title="Send It" onPress={this.clickMe}/>
+        < Button title="Send It" onPress={this.clickMe}/>
         </View>
 
         <View style={styles.titlesContainer}>
@@ -157,7 +157,6 @@ render() {
     <View style={styles.titlesContainer}>
         <Text style={styles.titles}>Nightlife</Text>
     </View>
-    <View style={styles.submitFlex}>
         <Picker 
             selectedValue={this.state.NightlifeSelected} 
             style={styles.picker}
@@ -166,7 +165,6 @@ render() {
             { this.dropDownMenu(this.state.nightlife) }
         </Picker>
         <Button title="Send It" onPress={this.clickMe}/>
-    </View>
     </ScrollView>)
     }
 }
@@ -208,6 +206,18 @@ const styles = StyleSheet.create({
         borderColor: '#fff',
         alignItems: 'center',
         textAlign: 'center'
+    },
+    button: {
+        alignSelf: 'stretch',
+        alignItems: 'center',
+        padding:20,
+        backgroundColor: '#83cfc9',
+        marginTop: 30,
+    },
+    btnText: {
+        color: 'rgba(255, 255, 255, 0.8)',
+        fontSize: 16,
+        fontWeight: 'bold'
     },
     pickerContainer:{
         
