@@ -33,7 +33,7 @@ class QuestionaireForm extends React.Component {
     };
 
     clickMe = () => {
-        console.log(this.state.token)
+        console.log(this.state)
     }
 
     retrieveToken = () => {
@@ -49,43 +49,66 @@ class QuestionaireForm extends React.Component {
             })
     }
 
-    async componentDidMount() {
-        const foodResponse = await fetch("https://dream-date.herokuapp.com/food")
-        const food = await foodResponse.json()
-        this.setState({
-            food: food.food,
+    getUserData = (token) => {
+        return fetch(`https://dream-date.herokuapp.com/users/${token}`, {
+            method: 'GET',
+            mode: 'cors',
+            headers: {
+                'Content-Type': 'application/json; charset=utf-8'
+            },
+        })
+            .then(res => res.json())
+    }
+
+    getCategories = (item) => {
+        return fetch(`https://dream-date.herokuapp.com/${item}`, {
+            method: 'GET',
+            mode: 'cors',
+            headers: {
+                'Content-Type': 'application/json; charset=utf-8'
+            },
+        })
+        .then(res => res.json())
+    }
+
+    setThatState = (item) => {
+        return this.setState({
+            item: item.item,
         }, 
         function(){
         })
-        const movieResponse = await fetch("https://dream-date.herokuapp.com/movie")
-        const movie = await movieResponse.json()
-        this.setState({
-            movie: movie.genre,
-        }, function(){
-        })
+    }
 
-    const indoorResponse = await fetch("https://dream-date.herokuapp.com/indoor")
-    const indoor = await indoorResponse.json()
-    this.setState({
-            indoor: indoor.activity,
-        }, function(){
-        })
-
-    const outdoorResponse = await fetch("https://dream-date.herokuapp.com/outdoor")
-    const outdoor = await outdoorResponse.json()
-    this.setState({
-            outdoor: outdoor.activity,
-        }, function(){
-        })
-
-    const nightlifeResponse = await fetch("https://dream-date.herokuapp.com/nightlife")
-    const nightlife = await nightlifeResponse.json()
-    this.setState({
-            nightlife: nightlife.activity,
-        }, function(){
-        })
+    componentDidMount() {
         this.retrieveToken()
+            .then(this.getUserData)
+            .then(this.getCategories('food'))
+            .then(food => {
+                return this.setState({ food: food.food, error: null })
+            })
+            .then(this.getCategories('movie'))
+            .then(movie => {
+                return this.setState({ movie: movie, error: null })
+            })
+            .then(this.getCategories('indoor'))
+            .then(indoor => {
+                return this.setState({ indoor: indoor, error: null })
+            })
+            .then(this.getCategories('outdoor'))
+            .then( outdoor  => {
+                return this.setState({ outdoor: outdoor, error: null })
+            })
+            .then(this.getCategories('nightlife'))
+            .then( nightlife  => {
+                return this.setState({ nightlife: nightlife, error: null })
+            })
+            .catch(err => {
+                console.error(err)
+                this.setState({error: err.message})
+            })
 }
+
+
     dropDownMenu(activity) {
         if (activity !== undefined) {
             var activityList = activity.map((item => {
@@ -129,7 +152,7 @@ render() {
             <Text style={styles.titles}>Favorite Genre of Movies?</Text>
         </View>
 
-        <View style={styles.pickerContainer}>
+        <View style={styles.submit}>
             <Picker 
                 selectedValue={this.state.MovieSelected} 
                 style={styles.picker}
@@ -143,7 +166,7 @@ render() {
             <View style={styles.titlesContainer}>
                 <Text style={styles.titles}>Favorite Indoor Activities?</Text>
             </View>
-            <View style={styles.pickerContainer}>
+            <View style={styles.submit}>
                 <Picker 
                     selectedValue={this.state.IndoorSelected} 
                     style={styles.picker}
@@ -156,7 +179,7 @@ render() {
             <View style={styles.titlesContainer}>
                 <Text style={styles.titles}>Favorite Outdoor Activities?</Text>
             </View>
-            <View style={styles.pickerContainer}>
+            <View style={styles.submit}>
                 <Picker 
                     selectedValue={this.state.OutdoorSelected} 
                     style={styles.picker}
@@ -169,8 +192,7 @@ render() {
 
         <View style={styles.titlesContainer}>
             <Text style={styles.titles}>Nightlife?</Text>
-        </View >
-        <View style={styles.pickerContainer}>
+        </View>
             <Picker 
                 selectedValue={this.state.NightlifeSelected} 
                 style={styles.picker}
@@ -178,7 +200,6 @@ render() {
             >
                 { this.dropDownMenu(this.state.nightlife) }
             </Picker>
-        </View>
             <TouchableOpacity style={styles.button} onPress={this.clickMe}> 
                 <Text style={styles.btnText}>Send It</Text>
             </TouchableOpacity>
@@ -202,10 +223,10 @@ const styles = StyleSheet.create({
         flex: 1,
         flexDirection: 'row',
         justifyContent: 'space-around',
-        borderTopWidth: 10,
+        borderTopWidth: 5,
         borderTopColor: "#fff",
         borderBottomColor: '#fff',
-        borderBottomWidth: 10,
+        borderBottomWidth: 5,
         padding: 15,
         marginTop: 20,
         marginBottom: 10
@@ -239,9 +260,12 @@ const styles = StyleSheet.create({
         fontSize: 16,
         fontWeight: 'bold'
     },
-    pickerContainer: {
+    submit: {
         borderWidth: 3,
-        borderColor: "#ffd7d7",
+        borderColor: "#fff",
+    },
+    pickerContainer:{
+        
     },
     picker:{
         
