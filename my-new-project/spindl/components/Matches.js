@@ -158,7 +158,7 @@ class Matches extends React.Component {
                     {this.state.showChoices ? 
                     <View>
                     <Text style={styles.personText}> Your Matches are:</Text>
-                    <Text style={styles.personText}>{this.state.matches} </Text>
+                    <Text style={styles.personText}>{this.state.matches.length ? this.state.matches: alert('Sorry you don\'t have any prefrences in common, but go on a date anyways!')} </Text>
                     </View> : <Text></Text>}
                     <TouchableOpacity onPress={this.goHome} style={styles.button}>
                         <Text style={styles.btnText}>Return Home</Text>
