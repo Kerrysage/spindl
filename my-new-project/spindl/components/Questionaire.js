@@ -13,6 +13,7 @@ import {
 import {WebBrowser} from 'expo';
 import {MonoText} from '../components/StyledText';
 import { withNavigation } from 'react-navigation';
+import { AsyncStorage } from "react-native"
 
 // import ModalDropdown from 'react-native-modal-dropdown';
 
@@ -23,11 +24,28 @@ class QuestionaireForm extends React.Component {
     };
 
     state = {
-    
+        FoodSelected: '',
+        MoviesSelected: '',
+        IndoorSelected: '',
+        OutdoorSelected: '',
+        NightlifeSelected: '',
     };
 
     clickMe = () => {
-        // console.log(this.state.OutdoorSelected,this.state.IndoorSelected,this.state.FoodSelected,this.state.NightlifeSelected,this.state.MoviesSelected)
+        console.log(this.state.token)
+    }
+
+    retrieveToken = () => {
+        if (this.state.token) return Promise.resolve(this.state.token)
+
+        return AsyncStorage.getItem('token')
+            .then(jwtDecode)
+            .then(token => {
+                this.setState(() => {
+                    return {token: token.id} 
+                })
+                return token.id;
+            })
     }
 
     async componentDidMount() {
@@ -65,6 +83,7 @@ class QuestionaireForm extends React.Component {
             nightlife: nightlife.activity,
         }, function(){
         })
+        this.retrieveToken()
 }
 
 
