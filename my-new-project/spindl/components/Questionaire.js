@@ -32,7 +32,7 @@ class QuestionaireForm extends React.Component {
     };
 
     clickMe = () => {
-        console.log(this.state)
+        console.log(this.state.user)
         return fetch (`https://dream-date.herokuapp.com/choices`, {
             method: 'POST',
             mode: 'cors',
@@ -40,6 +40,7 @@ class QuestionaireForm extends React.Component {
                 'Content-Type': 'Application/json; charset=utf-8'
             },
             body: JSON.stringify({
+            "user_id": this.state.user[0].id,   
             "movie_choice1": this.state.MoviesSelected,
             "food_choice1": this.state.FoodSelected,
             "indoor_choice1": this.state.IndoorSelected,

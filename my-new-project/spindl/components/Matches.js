@@ -55,8 +55,12 @@ class Matches extends React.Component {
             },
         })
         .then(res => res.json())
-        .then(({ choices }) => {
-                return this.setState({ choices: choices[0], error: null })
+        .then(choices => {
+            if(choices.error){
+                alert(choices.error)
+            } else { 
+                ({choices}) => this.setState({ choices: choices[0], error: null })
+            }
             })
     }
 
@@ -77,10 +81,6 @@ class Matches extends React.Component {
             .then( ({user}) => {
                 return this.setState({ user: user[0], error: null })
             })
-            // .then(this.getChoices(this.state.user.id))
-            // .then(({ choices }) => {
-            //     return this.setState({ choices: choices[0], error: null })
-            // })
             .catch(err => {
                 console.error(err)
                 this.setState({error: err.message})
