@@ -19,7 +19,11 @@ class Matches extends React.Component {
     state = {
         user: '',
         choices: '',
-        showChoices: false
+        showChoices: false,
+        CharlieChoices:'',
+        userArr:'',
+        charlieArr:'',
+        matches:''
     }
 
     retrieveToken = () => {
@@ -46,6 +50,18 @@ class Matches extends React.Component {
             .then(res => res.json())
     }
 
+    getCharilie = () => {
+        return fetch(`https://dream-date.herokuapp.com/choices/4`, {
+            method: 'GET',
+            mode: 'cors',
+            headers: {
+                'Content-Type': 'application/json; charset=utf-8'
+            },
+        })
+        .then(res => res.json())
+        .then(({choices}) => this.setState({ CharlieChoices: choices[0], error: null }))
+    }
+
     getChoices = () => {
         return fetch(`https://dream-date.herokuapp.com/choices/${this.state.token}`, {
             method: 'GET',
@@ -60,9 +76,39 @@ class Matches extends React.Component {
 
     grabChoices = () => {
         this.getChoices()
+        .then(this.getCharilie)
+        .then(this.getCharilieMatches)
+        .then(this.getUserMatches)
+        .then(this.findMatch)
         .then(() => this.setState({showChoices: !this.state.showChoices}))
         
         
+    }
+
+    getUserMatches = () => {
+        const user = []
+        const userCoices = this.state.choices
+        for(key in userCoices){
+            user.push(userCoices[key])
+        }
+        return this.setState({userArr: user})
+    }
+
+    getCharilieMatches = () => {
+        const charlie = []
+        const charlieChoices = this.state.CharlieChoices
+        for(key in charlieChoices){
+            charlie.push(charlieChoices[key])
+        }
+        return this.setState({charlieArr: charlie})
+    }
+
+    findMatch = () => {
+        const matches = this.state.userArr.filter((item, index) => {
+            return item === this.state.charlieArr[index]
+        })
+        const newMatches = matches.join(', ')
+        return this.setState({matches: newMatches})
     }
 
     goHome = () => {
@@ -111,12 +157,8 @@ class Matches extends React.Component {
                     </TouchableOpacity>
                     {this.state.showChoices ? 
                     <View>
-                    <Text> {this.state.user.name} likes...</Text>
-                    <Text>{this.state.choices.food_choice1} food,</Text>
-                    <Text>favorite movie genre: {this.state.choices.movie_choice1},</Text>
-                    <Text>Indoor Activity: {this.state.choices.indoor_choice1},</Text>
-                    <Text>Outdoor Activity: {this.state.choices.outdoor_choice1},</Text>
-                    <Text>Out on the Town Activity: {this.state.choices.ight_life_choice1},</Text>
+                    <Text style={styles.personText}> Your Matches are:</Text>
+                    <Text style={styles.personText}>{this.state.matches.length ? this.state.matches: alert('Sorry, you don\'t have any prefrences in common. But go on a date anyways!')} </Text>
                     </View> : <Text></Text>}
                     <TouchableOpacity onPress={this.goHome} style={styles.button}>
                         <Text style={styles.btnText}>Return Home</Text>
