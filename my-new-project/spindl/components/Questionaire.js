@@ -100,18 +100,6 @@ render() {
     // console.log(this.state.FoodSelected);
     return (
         <ScrollView style={styles.Questionaire}>
-<<<<<<< HEAD
-        <View style={styles.headerContainer}>
-            <Image 
-                source={{uri: 'https://placeimg.com/200/200/people'}} 
-                fadeDuration={0} 
-                style={styles.img}
-            />
-            <View style={styles.infoContainer}>
-                <Text style={styles.infoText}>Name: </Text>
-                <Text style={styles.infoText}>Age: </Text>
-                <Text style={styles.infoText}>Location: </Text>
-=======
             <View style={styles.headerContainer}>
                 <Image 
                     source={{uri: 'https://placeimg.com/200/200/people'}} 
@@ -140,7 +128,6 @@ render() {
 
             <View style={styles.titlesContainer}>
                 <Text style={styles.titles}>Favorite Genre of Movies?</Text>
->>>>>>> 839f2f601be7e581a0c26e1bcd8054fce123e711
             </View>
 
             <View style={styles.pickerContainer}>
@@ -154,34 +141,11 @@ render() {
                 </Picker>
             </View>
 
-<<<<<<< HEAD
-        <View style={styles.titlesContainer}>
-            <Text style={styles.titles}>Favorite Genre of Movies?</Text>
-        </View>
-
-        <View style={styles.submit}>
-            <Picker 
-                selectedValue={this.state.MovieSelected} 
-                style={styles.picker}
-                onValueChange={(itemValue, itemIndex) => this.setState({MoviesSelected: itemValue})}
-                itemStyle={{color: "#494141", alignItems: 'center', fontSize:24 }}
-                >
-                { this.dropDownMenu(this.state.movie) }
-            </Picker>
-        
-        </View>
-
-            <View style={styles.titlesContainer}>
-                <Text style={styles.titles}>Favorite Indoor Activities?</Text>
-            </View>
-            <View style={styles.submit}>
-=======
             <View style={styles.titlesContainer}>
                 <Text style={styles.titles}>Favorite Indoor Activities?</Text>
             </View>
 
             <View style={styles.pickerContainer}>
->>>>>>> 839f2f601be7e581a0c26e1bcd8054fce123e711
                 <Picker 
                     selectedValue={this.state.IndoorSelected} 
                     style={styles.picker}
@@ -195,12 +159,8 @@ render() {
             <View style={styles.titlesContainer}>
                 <Text style={styles.titles}>Favorite Outdoor Activities?</Text>
             </View>
-<<<<<<< HEAD
-            <View style={styles.submit}>
-=======
 
             <View style={styles.pickerContainer}>
->>>>>>> 839f2f601be7e581a0c26e1bcd8054fce123e711
                 <Picker 
                     selectedValue={this.state.OutdoorSelected} 
                     style={styles.picker}
@@ -227,20 +187,6 @@ render() {
                 </Picker>
             </View>
 
-<<<<<<< HEAD
-        <View style={styles.titlesContainer}>
-            <Text style={styles.titles}>Nightlife?</Text>
-        </View>
-            <Picker 
-                selectedValue={this.state.NightlifeSelected} 
-                style={styles.picker}
-                onValueChange={(itemValue, itemIndex) => this.setState({NightlifeSelected: itemValue})}
-                itemStyle={{color: "#494141", alignItems: 'center', fontSize:24 }}
-            >
-                { this.dropDownMenu(this.state.nightlife) }
-            </Picker>
-=======
->>>>>>> 839f2f601be7e581a0c26e1bcd8054fce123e711
             <TouchableOpacity style={styles.button} onPress={this.clickMe}> 
                 <Text style={styles.btnText}>Send It</Text>
             </TouchableOpacity>
@@ -303,14 +249,7 @@ const styles = StyleSheet.create({
     },
     submit: {
         borderWidth: 3,
-<<<<<<< HEAD
-        borderColor: "#fff",
-    },
-    pickerContainer:{
-        
-=======
         borderColor: '#ffd7d7',
->>>>>>> 7da2f88f9715ab18da5a79ed3dd3850e33385cf6
     },
     picker:{
         backgroundColor: '#fef4f4',
