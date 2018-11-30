@@ -37,7 +37,7 @@ class Questionaire extends React.Component {
 const styles = StyleSheet.create({
     scrollView:{
         flex: 1,
-        backgroundColor: '#F98F8F'
+        backgroundColor: '#F99367'
     },
     container:{
         paddingHorizontal: 10,

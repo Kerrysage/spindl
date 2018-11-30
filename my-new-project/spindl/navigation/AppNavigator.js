@@ -20,6 +20,6 @@ export default createSwitchNavigator(
     
   },
   {
-    initialRouteName: "Home"
+    initialRouteName: "Questionaire"
   }
 );

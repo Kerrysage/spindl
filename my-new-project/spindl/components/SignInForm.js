@@ -16,9 +16,9 @@ class SignInForm extends React.Component {
 
     storeData = async (token) => {
         try {
-          await AsyncStorage.setItem('token', token);
+            await AsyncStorage.setItem('token', token);
         } catch (error) {
-          console.log(error)
+            console.log(error)
         }
     }
 
@@ -121,7 +121,7 @@ const styles = StyleSheet.create({
         alignSelf: 'stretch',
         alignItems: 'center',
         padding:20,
-        backgroundColor: '#59cbbd',
+        backgroundColor: '#83cfc9',
         marginTop: 30,
     },
     btnText: {

@@ -95,80 +95,80 @@ render() {
     </View>
 
 
-      <View>
-        <Text>Food</Text>
-      </View>
-      <View style={styles.submit}>
-        <Picker selectedValue={this.state.FoodSelected} style={{
-            height: 50,
-            width: 200
-          }} onValueChange={(itemValue, itemIndex) => this.setState({FoodSelected: itemValue})
-}>
-          {/* <Picker.Item enabled="false" label="" value="" /> */}
-          {this.dropDownMenu(this.state.food)}
+
+    <Text style={styles.titles}>Food</Text>
+    <View style={styles.pickerContainer}>
+        <Picker 
+            selectedValue={this.state.FoodSelected} 
+            style={styles.picker}
+            placeholder= 'Select Favorite Food'
+            onValueChange={(itemValue, itemIndex) => this.setState({FoodSelected: itemValue})}
+            >   
+            {/* <Picker.Item enabled="false" label="" value="" /> */}
+            {this.dropDownMenu(this.state.food)}
         </Picker>
         <Button title="Send It" onPress={this.clickMe}/>
-      </View>
+    </View>
 
-      <View>
-        <Text>Movies</Text>
-      </View>
-      <View style={styles.submit}>
-        <Picker selectedValue={this.state.MovieSelected} style={{
-            height: 50,
-            width: 200
-          }} onValueChange={(itemValue, itemIndex) => this.setState({MoviesSelected: itemValue})
-}>
-          { this.dropDownMenu(this.state.movie) }
-        </Picker>
-        <Button title="Send It" onPress={this.clickMe}/>
-      </View>
+    <View style={styles.titlesContainer}>
+        <Text style={styles.titles}>Movies</Text>
+    </View>
+    <View style={styles.submit}>
+        <Picker 
+            selectedValue={this.state.MovieSelected} 
+            style={styles.picker}
+            onValueChange={(itemValue, itemIndex) => this.setState({MoviesSelected: itemValue})}
+            >
+        { this.dropDownMenu(this.state.movie) }
+    </Picker>
 
-      <View>
-        <Text>Indoor</Text>
-      </View>
-      <View style={styles.submit}>
-        <Picker selectedValue={this.state.IndoorSelected} style={{
-            height: 50,
-            width: 200
-          }} onValueChange={(itemValue, itemIndex) => this.setState({IndoorSelected: itemValue})
-}>
-          { this.dropDownMenu(this.state.indoor) }
+    <Button title="Send It" onPress={this.clickMe}/>
+        </View>
+
+        <View style={styles.titlesContainer}>
+            <Text style={styles.titles}>Indoor</Text>
+        </View>
+        <View style={styles.submit}>
+        <Picker 
+            selectedValue={this.state.IndoorSelected} 
+            style={styles.picker}
+            onValueChange={(itemValue, itemIndex) => this.setState({IndoorSelected: itemValue})}
+            >
+            { this.dropDownMenu(this.state.indoor) }
         </Picker>
     
         <Button title="Send It" onPress={this.clickMe}/>
-      </View>
+        </View>
 
-      <View>
-        <Text>Outdoor</Text>
-      </View>
-      <View style={styles.submit}>
-        <Picker selectedValue={this.state.OutdoorSelected} style={{
-            height: 50,
-            width: 200
-          }} onValueChange={(itemValue, itemIndex) => this.setState({OutdoorSelected: itemValue})
-}>
-          { this.dropDownMenu(this.state.outdoor) }
+        <View style={styles.titlesContainer}>
+            <Text style={styles.titles}>Outdoor</Text>
+        </View>
+        <View style={styles.submit}>
+            <Picker 
+                selectedValue={this.state.OutdoorSelected} 
+                style={styles.picker}
+                onValueChange={(itemValue, itemIndex) => this.setState({OutdoorSelected: itemValue})}
+                >
+            { this.dropDownMenu(this.state.outdoor) }
         </Picker>
         <Button title="Send It" onPress={this.clickMe}/>
-      </View>
+    </View>
 
-      <View>
-        <Text>Nighlife</Text>
-      </View>
-      <View style={styles.submitFlex}>
-        <Picker selectedValue={this.state.NightlifeSelected} style={{
-            height: 50,
-            width: 200
-          }} onValueChange={(itemValue, itemIndex) => this.setState({NightlifeSelected: itemValue})
-}>
-          { this.dropDownMenu(this.state.nightlife) }
+    <View style={styles.titlesContainer}>
+        <Text style={styles.titles}>Nightlife</Text>
+    </View>
+    <View style={styles.submitFlex}>
+        <Picker 
+            selectedValue={this.state.NightlifeSelected} 
+            style={styles.picker}
+            onValueChange={(itemValue, itemIndex) => this.setState({NightlifeSelected: itemValue})}
+        >
+            { this.dropDownMenu(this.state.nightlife) }
         </Picker>
         <Button title="Send It" onPress={this.clickMe}/>
-      </View>
+    </View>
     </ScrollView>)
-
-  }
+    }
 }
 
 const styles = StyleSheet.create({
@@ -190,7 +190,30 @@ const styles = StyleSheet.create({
         borderBottomColor: '#fff',
         borderBottomWidth: 5,
         padding: 15,
-        marginTop: 20
+        marginTop: 20,
+        marginBottom: 10
+    },
+    titlesContainer:{
+        marginBottom: 10
+    },
+    titles:{
+        fontSize: 24,
+        color: '#fff',
+        paddingBottom:10,
+        paddingTop: 10,
+        marginBottom:30,
+        marginTop: 40,
+        borderBottomColor: "#fff",
+        borderWidth: 3,
+        borderColor: '#fff',
+        alignItems: 'center',
+        textAlign: 'center'
+    },
+    pickerContainer:{
+        
+    },
+    picker:{
+        
     },
 
 
