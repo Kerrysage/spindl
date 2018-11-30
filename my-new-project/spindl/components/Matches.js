@@ -19,7 +19,11 @@ class Matches extends React.Component {
     state = {
         user: '',
         choices: '',
-        showChoices: false
+        showChoices: false,
+        CharlieChoices:'',
+        userArr:'',
+        charlieArr:'',
+        matches:''
     }
 
     retrieveToken = () => {
@@ -46,6 +50,18 @@ class Matches extends React.Component {
             .then(res => res.json())
     }
 
+    getCharilie = () => {
+        return fetch(`https://dream-date.herokuapp.com/choices/4`, {
+            method: 'GET',
+            mode: 'cors',
+            headers: {
+                'Content-Type': 'application/json; charset=utf-8'
+            },
+        })
+        .then(res => res.json())
+        .then(({choices}) => this.setState({ CharlieChoices: choices[0], error: null }))
+    }
+
     getChoices = () => {
         return fetch(`https://dream-date.herokuapp.com/choices/${this.state.token}`, {
             method: 'GET',
@@ -65,6 +81,31 @@ class Matches extends React.Component {
         
     }
 
+    getUserMatches = () => {
+        const user = []
+        const userCoices = this.state.choices
+        for(key in userCoices){
+            user.push(userCoices[key])
+        }
+        return user
+    }
+
+    getCharilieMatches = () => {
+        const charlie = []
+        const charlieChoices = this.state.CharlieChoices
+        for(key in charlieChoices){
+            charlie.push(charlieChoices[key])
+        }
+        return charlie
+    }
+
+    findMatch = () => {
+        const matches = this.state.userArr.filter((item, index) => {
+            item === this.state.charlieArr[index]
+        })
+        return matches
+    }
+
     goHome = () => {
         this.props.navigation.navigate('Profile')
     }
@@ -75,6 +116,12 @@ class Matches extends React.Component {
             .then( ({user}) => {
                 return this.setState({ user: user[0], error: null })
             })
+            .then(this.getCharilieMatches)
+            .then(res => this.setState({charlieArr: res}))
+            .then(this.getUserMatches)
+            .then(res => this.setState({userArr: res}))
+            .then(this.findMatch)
+            .then(res => this.setState({matches: res}))
             .catch(err => {
                 console.error(err)
                 this.setState({error: err.message})
@@ -111,12 +158,21 @@ class Matches extends React.Component {
                     </TouchableOpacity>
                     {this.state.showChoices ? 
                     <View>
-                    <Text> {this.state.user.name} likes...</Text>
-                    <Text>{this.state.choices.food_choice1} food,</Text>
-                    <Text>favorite movie genre: {this.state.choices.movie_choice1},</Text>
-                    <Text>Indoor Activity: {this.state.choices.indoor_choice1},</Text>
-                    <Text>Outdoor Activity: {this.state.choices.outdoor_choice1},</Text>
-                    <Text>Out on the Town Activity: {this.state.choices.ight_life_choice1},</Text>
+                    <Text style={styles.personText}> Your Matches are:</Text>
+                    <Text style={styles.personText}>{this.state.choices.food_choice1} food,</Text>
+                    <Text style={styles.personText}>favorite movie genre: {this.state.choices.movie_choice1},</Text>
+                    <Text style={styles.personText}>Indoor Activity: {this.state.choices.indoor_choice1},</Text>
+                    <Text style={styles.personText}>Outdoor Activity: {this.state.choices.outdoor_choice1},</Text>
+                    <Text style={styles.personText}>Out on the Town Activity: {this.state.choices.ight_life_choice1},</Text>
+                    </View> : <Text></Text>}
+                    {this.state.showChoices ? 
+                    <View>
+                    <Text style={styles.personText}> Charlie likes...</Text>
+                    <Text style={styles.personText}>{this.state.choices.food_choice1} food,</Text>
+                    <Text style={styles.personText}>favorite movie genre: {this.state.CharlieChoices.movie_choice1},</Text>
+                    <Text style={styles.personText}>Indoor Activity: {this.state.CharlieChoices.indoor_choice1},</Text>
+                    <Text style={styles.personText}>Outdoor Activity: {this.state.CharlieChoices.outdoor_choice1},</Text>
+                    <Text style={styles.personText}>Out on the Town Activity: {this.state.CharlieChoices.ight_life_choice1},</Text>
                     </View> : <Text></Text>}
                     <TouchableOpacity onPress={this.goHome} style={styles.button}>
                         <Text style={styles.btnText}>Return Home</Text>
