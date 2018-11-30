@@ -80,90 +80,90 @@ class QuestionaireForm extends React.Component {
 render() {
     // console.log(this.state.FoodSelected);
     return (
-    <ScrollView style={styles.Questionaire}>
-    <View style={styles.headerContainer}>
-        <Image 
-            source={{uri: 'https://placeimg.com/200/200/people'}} 
-            fadeDuration={0} 
-            style={styles.img}
-        />
-        <View style={styles.infoContainer}>
-            <Text style={styles.infoText}>Name</Text>
-            <Text style={styles.infoText}>Age</Text>
-            <Text style={styles.infoText}>Location</Text>
+        <ScrollView style={styles.Questionaire}>
+        <View style={styles.headerContainer}>
+            <Image 
+                source={{uri: 'https://placeimg.com/200/200/people'}} 
+                fadeDuration={0} 
+                style={styles.img}
+            />
+            <View style={styles.infoContainer}>
+                <Text style={styles.infoText}>Name</Text>
+                <Text style={styles.infoText}>Age</Text>
+                <Text style={styles.infoText}>Location</Text>
+            </View>
         </View>
-    </View>
 
-    <Text style={styles.titles}>Food</Text>
-    <View style={styles.pickerContainer}>
-        <Picker 
-            selectedValue={this.state.FoodSelected} 
-            style={styles.picker}
-            placeholder= 'Select Favorite Food'
-            onValueChange={(itemValue, itemIndex) => this.setState({FoodSelected: itemValue})}
-            >   
-            {/* <Picker.Item enabled="false" label="" value="" /> */}
-            {this.dropDownMenu(this.state.food)}
-        </Picker>
-    </View>
-
-    <View style={styles.titlesContainer}>
-        <Text style={styles.titles}>Movies</Text>
-    </View>
-
-    <View style={styles.submit}>
-        <Picker 
-            selectedValue={this.state.MovieSelected} 
-            style={styles.picker}
-            onValueChange={(itemValue, itemIndex) => this.setState({MoviesSelected: itemValue})}
-            >
-            { this.dropDownMenu(this.state.movie) }
-        </Picker>
-    
-    </View>
+        <Text style={styles.titles}>Favorite Type of Food?</Text>
+            <View style={styles.pickerContainer}>
+                <Picker 
+                    selectedValue={this.state.FoodSelected} 
+                    style={styles.picker}
+                    placeholder= 'Select Favorite Food'
+                    onValueChange={(itemValue, itemIndex) => this.setState({FoodSelected: itemValue})}
+                    >   
+                    {/* <Picker.Item enabled="false" label="" value="" /> */}
+                    {this.dropDownMenu(this.state.food)}
+                </Picker>
+            </View>
 
         <View style={styles.titlesContainer}>
-            <Text style={styles.titles}>Indoor</Text>
+            <Text style={styles.titles}>Favorite Genre of Movies?</Text>
         </View>
+
         <View style={styles.submit}>
             <Picker 
-                selectedValue={this.state.IndoorSelected} 
+                selectedValue={this.state.MovieSelected} 
                 style={styles.picker}
-                onValueChange={(itemValue, itemIndex) => this.setState({IndoorSelected: itemValue})}
+                onValueChange={(itemValue, itemIndex) => this.setState({MoviesSelected: itemValue})}
                 >
-                { this.dropDownMenu(this.state.indoor) }
+                { this.dropDownMenu(this.state.movie) }
             </Picker>
+        
+        </View>
+
+            <View style={styles.titlesContainer}>
+                <Text style={styles.titles}>Favorite Indoor Activities?</Text>
+            </View>
+            <View style={styles.submit}>
+                <Picker 
+                    selectedValue={this.state.IndoorSelected} 
+                    style={styles.picker}
+                    onValueChange={(itemValue, itemIndex) => this.setState({IndoorSelected: itemValue})}
+                    >
+                    { this.dropDownMenu(this.state.indoor) }
+                </Picker>
+            </View>
+
+            <View style={styles.titlesContainer}>
+                <Text style={styles.titles}>Favorite Outdoor Activities?</Text>
+            </View>
+            <View style={styles.submit}>
+                <Picker 
+                    selectedValue={this.state.OutdoorSelected} 
+                    style={styles.picker}
+                    onValueChange={(itemValue, itemIndex) => this.setState({OutdoorSelected: itemValue})}
+                    >
+                { this.dropDownMenu(this.state.outdoor) }
+            </Picker>
+            
         </View>
 
         <View style={styles.titlesContainer}>
-            <Text style={styles.titles}>Outdoor</Text>
+            <Text style={styles.titles}>Nightlife?</Text>
         </View>
-        <View style={styles.submit}>
             <Picker 
-                selectedValue={this.state.OutdoorSelected} 
+                selectedValue={this.state.NightlifeSelected} 
                 style={styles.picker}
-                onValueChange={(itemValue, itemIndex) => this.setState({OutdoorSelected: itemValue})}
-                >
-            { this.dropDownMenu(this.state.outdoor) }
-        </Picker>
-        
-    </View>
+                onValueChange={(itemValue, itemIndex) => this.setState({NightlifeSelected: itemValue})}
+            >
+                { this.dropDownMenu(this.state.nightlife) }
+            </Picker>
+            <TouchableOpacity style={styles.button} onPress={this.clickMe}> 
+                <Text style={styles.btnText}>Send It</Text>
+            </TouchableOpacity>
+        </ScrollView>
 
-    <View style={styles.titlesContainer}>
-        <Text style={styles.titles}>Nightlife</Text>
-    </View>
-        <Picker 
-            selectedValue={this.state.NightlifeSelected} 
-            style={styles.picker}
-            onValueChange={(itemValue, itemIndex) => this.setState({NightlifeSelected: itemValue})}
-        >
-            { this.dropDownMenu(this.state.nightlife) }
-        </Picker>
-        <TouchableOpacity style={styles.button} onPress={this.clickMe}> 
-            <Text style={styles.btnText}>Send It</Text>
-        </TouchableOpacity>
-    </ScrollView>
-    
         )
     }
 }
@@ -204,7 +204,8 @@ const styles = StyleSheet.create({
         borderWidth: 3,
         borderColor: '#fff',
         alignItems: 'center',
-        textAlign: 'center'
+        textAlign: 'center',
+        backgroundColor: '#ec4760'
     },
     button: {
         alignSelf: 'stretch',
@@ -217,6 +218,10 @@ const styles = StyleSheet.create({
         color: 'rgba(255, 255, 255, 0.8)',
         fontSize: 16,
         fontWeight: 'bold'
+    },
+    submit: {
+        borderWidth: 3,
+        borderColor: "#fff",
     },
     pickerContainer:{
         
@@ -257,9 +262,7 @@ const styles = StyleSheet.create({
         display: 'flex',
         flexDirection: 'column'
     },
-    submit: {
-        // width: 100
-    },
+   
     submitFlex: {
         display: 'flex',
         flexDirection: 'row'
