@@ -147,7 +147,7 @@ class Matches extends React.Component {
                         <Text style={styles.personText}>Charlie</Text>
                         <Image 
                             style={styles.matchImg} 
-                            source={{uri:'https://placeimg.com/200/200/people'}}
+                            source={{uri:'https://scontent-sjc3-1.xx.fbcdn.net/v/t31.0-8/27993119_2040366812869929_5290389208489674231_o.jpg?_nc_cat=103&_nc_ht=scontent-sjc3-1.xx&oh=4c124867e8f9ba752c3cd7fb97419a32&oe=5C72D259'}}
                         />
                     </View>
                 </View>
@@ -177,16 +177,18 @@ const styles = StyleSheet.create({
     },
     header:{
         fontSize: 24,
+        backgroundColor: '#05c1af',
         color: '#fff',
         paddingBottom:10,
         paddingTop: 10,
-        marginBottom: 20,
+        marginBottom:20,
         marginTop: 30,
-        borderBottomColor: "#fff",
-        borderWidth: 4,
+        borderWidth: 3,
+        borderRadius: 15,
         borderColor: '#fff',
         alignItems: 'center',
-        textAlign: 'center'
+        textAlign: 'center',
+        overflow: 'hidden'
     },
     img:{
         height: 150,
@@ -214,17 +216,27 @@ const styles = StyleSheet.create({
         flex: 1,
         flexDirection: 'row',
         justifyContent: 'space-around',
-        padding: 10,
+        backgroundColor: 'rgba(0, 219, 255, 0.8)',
+        // borderColor: 'rgba(255, 255, 255, 0.8)',
+        // borderWidth: 5,
+        borderRadius: 15,
+        padding: 15,
+        paddingTop: 20,
+        paddingBottom: 20,
         marginTop: 20,
-        borderWidth: 3,
-        borderColor: '#fff'
+        shadowColor: 'rgba(0, 187, 206, 0.6)',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.8,
+        shadowRadius: 2,
+        elevation: 1,
     },
     matchImg:{
         height: 120,
         width: 120,
         paddingTop: 50,
         alignItems: 'center',
-        paddingTop: 20
+        paddingTop: 20,
+        borderRadius: 60
     },
     matchHeart: {
         height: 50,

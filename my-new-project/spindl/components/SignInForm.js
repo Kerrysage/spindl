@@ -90,17 +90,18 @@ const styles = StyleSheet.create({
     },
     header:{
         fontSize: 24,
-        backgroundColor: '#F99367',
+        backgroundColor: '#ec4760',
         color: '#fff',
         paddingBottom:10,
         paddingTop: 10,
         marginBottom:30,
         marginTop: 40,
-        borderBottomColor: "#fff",
         borderWidth: 3,
+        borderRadius: 15,
         borderColor: '#fff',
         alignItems: 'center',
         textAlign: 'center',
+        overflow: 'hidden'
     },
     textInput:{
         alignSelf: 'stretch',
