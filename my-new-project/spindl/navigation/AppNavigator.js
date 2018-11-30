@@ -19,6 +19,6 @@ export default createSwitchNavigator(
     Questionaire: Questionaire
   },
   {
-    initialRouteName: "Matches"
+    initialRouteName: "Home"
   }
 );

@@ -28,7 +28,7 @@ class SignUpForm extends React.Component {
     }
 
     signUp = () => {
-        if((this.state.email !== '') && (this.state.password !== '')){
+        if((this.state.email !== '') && (this.state.password !== '') && (parseInt(this.state.age)) && (this.state.name !== '') && (this.state.location !== '') && (this.state.gender !== '')){
             return fetch ('https://dream-date.herokuapp.com/auth/signup', {
                 method: 'POST',
                 mode: 'cors',
@@ -54,7 +54,7 @@ class SignUpForm extends React.Component {
                 }
             })
         } else {
-            return alert('Please make sure all fields are filled out')
+            return alert('Please make sure all fields are filled out correctly')
         }
     }
 
