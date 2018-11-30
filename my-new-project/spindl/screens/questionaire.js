@@ -12,8 +12,7 @@ import {
 import { WebBrowser } from 'expo';
 import { MonoText } from '../components/StyledText';
 import {withNavigation} from 'react-navigation';
-
-import Questionaire from '../components/Questionaire';
+import QuestionaireForm from '../components/Questionaire';
 
 class Questionaire extends React.Component {
     static navigationOptions = {
@@ -28,7 +27,7 @@ class Questionaire extends React.Component {
                         style= {styles.images}
                         source={require('../assets/images/dd-logo.png')}
                     />
-                <Questionaire />
+                <QuestionaireForm />
             </View>
         </ScrollView>
         )
