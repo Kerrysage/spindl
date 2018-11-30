@@ -66,8 +66,6 @@ class QuestionaireForm extends React.Component {
         }, function(){
         })
 }
-
-
     dropDownMenu(activity) {
         if (activity !== undefined) {
             var activityList = activity.map((item => {
@@ -111,7 +109,7 @@ render() {
             <Text style={styles.titles}>Favorite Genre of Movies?</Text>
         </View>
 
-        <View style={styles.submit}>
+        <View style={styles.pickerContainer}>
             <Picker 
                 selectedValue={this.state.MovieSelected} 
                 style={styles.picker}
@@ -125,7 +123,7 @@ render() {
             <View style={styles.titlesContainer}>
                 <Text style={styles.titles}>Favorite Indoor Activities?</Text>
             </View>
-            <View style={styles.submit}>
+            <View style={styles.pickerContainer}>
                 <Picker 
                     selectedValue={this.state.IndoorSelected} 
                     style={styles.picker}
@@ -138,7 +136,7 @@ render() {
             <View style={styles.titlesContainer}>
                 <Text style={styles.titles}>Favorite Outdoor Activities?</Text>
             </View>
-            <View style={styles.submit}>
+            <View style={styles.pickerContainer}>
                 <Picker 
                     selectedValue={this.state.OutdoorSelected} 
                     style={styles.picker}
@@ -151,7 +149,8 @@ render() {
 
         <View style={styles.titlesContainer}>
             <Text style={styles.titles}>Nightlife?</Text>
-        </View>
+        </View >
+        <View style={styles.pickerContainer}>
             <Picker 
                 selectedValue={this.state.NightlifeSelected} 
                 style={styles.picker}
@@ -159,6 +158,7 @@ render() {
             >
                 { this.dropDownMenu(this.state.nightlife) }
             </Picker>
+        </View>
             <TouchableOpacity style={styles.button} onPress={this.clickMe}> 
                 <Text style={styles.btnText}>Send It</Text>
             </TouchableOpacity>
@@ -182,10 +182,10 @@ const styles = StyleSheet.create({
         flex: 1,
         flexDirection: 'row',
         justifyContent: 'space-around',
-        borderTopWidth: 5,
+        borderTopWidth: 10,
         borderTopColor: "#fff",
         borderBottomColor: '#fff',
-        borderBottomWidth: 5,
+        borderBottomWidth: 10,
         padding: 15,
         marginTop: 20,
         marginBottom: 10
@@ -219,12 +219,9 @@ const styles = StyleSheet.create({
         fontSize: 16,
         fontWeight: 'bold'
     },
-    submit: {
+    pickerContainer: {
         borderWidth: 3,
-        borderColor: "#fff",
-    },
-    pickerContainer:{
-        
+        borderColor: "#ffd7d7",
     },
     picker:{
         
