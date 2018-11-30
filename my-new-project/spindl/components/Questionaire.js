@@ -105,39 +105,34 @@ render() {
             {/* <Picker.Item enabled="false" label="" value="" /> */}
             {this.dropDownMenu(this.state.food)}
         </Picker>
-        <TouchableOpacity style={styles.button} onPress={this.clickMe}> 
-            <Text style={styles.btnText}>Send It</Text>
-        </TouchableOpacity>
     </View>
 
     <View style={styles.titlesContainer}>
         <Text style={styles.titles}>Movies</Text>
     </View>
+
     <View style={styles.submit}>
         <Picker 
             selectedValue={this.state.MovieSelected} 
             style={styles.picker}
             onValueChange={(itemValue, itemIndex) => this.setState({MoviesSelected: itemValue})}
             >
-        { this.dropDownMenu(this.state.movie) }
-    </Picker>
-
-    <Button title="Send It" onPress={this.clickMe}/>
-        </View>
+            { this.dropDownMenu(this.state.movie) }
+        </Picker>
+    
+    </View>
 
         <View style={styles.titlesContainer}>
             <Text style={styles.titles}>Indoor</Text>
         </View>
         <View style={styles.submit}>
-        <Picker 
-            selectedValue={this.state.IndoorSelected} 
-            style={styles.picker}
-            onValueChange={(itemValue, itemIndex) => this.setState({IndoorSelected: itemValue})}
-            >
-            { this.dropDownMenu(this.state.indoor) }
-        </Picker>
-    
-        < Button title="Send It" onPress={this.clickMe}/>
+            <Picker 
+                selectedValue={this.state.IndoorSelected} 
+                style={styles.picker}
+                onValueChange={(itemValue, itemIndex) => this.setState({IndoorSelected: itemValue})}
+                >
+                { this.dropDownMenu(this.state.indoor) }
+            </Picker>
         </View>
 
         <View style={styles.titlesContainer}>
@@ -151,7 +146,7 @@ render() {
                 >
             { this.dropDownMenu(this.state.outdoor) }
         </Picker>
-        <Button title="Send It" onPress={this.clickMe}/>
+        
     </View>
 
     <View style={styles.titlesContainer}>
@@ -164,8 +159,12 @@ render() {
         >
             { this.dropDownMenu(this.state.nightlife) }
         </Picker>
-        <Button title="Send It" onPress={this.clickMe}/>
-    </ScrollView>)
+        <TouchableOpacity style={styles.button} onPress={this.clickMe}> 
+            <Text style={styles.btnText}>Send It</Text>
+        </TouchableOpacity>
+    </ScrollView>
+    
+        )
     }
 }
 
