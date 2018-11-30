@@ -36,10 +36,42 @@ class QuestionaireForm extends React.Component {
         console.log(this.state)
     }
 
-    retrieveToken = () => {
-        if (this.state.token) return Promise.resolve(this.state.token)
+    async componentDidMount() {
+        const foodResponse = await fetch("https://dream-date.herokuapp.com/food")
+        const food = await foodResponse.json()
+        this.setState({
+            food: food.food,
+        }, 
+        function(){
+        })
+        const movieResponse = await fetch("https://dream-date.herokuapp.com/movie")
+        const movie = await movieResponse.json()
+        this.setState({
+            movie: movie.genre,
+        }, function(){
+        })
 
-        return AsyncStorage.getItem('token')
+    const indoorResponse = await fetch("https://dream-date.herokuapp.com/indoor")
+    const indoor = await indoorResponse.json()
+    this.setState({
+            indoor: indoor.activity,
+        }, function(){
+        })
+
+    const outdoorResponse = await fetch("https://dream-date.herokuapp.com/outdoor")
+    const outdoor = await outdoorResponse.json()
+    this.setState({
+            outdoor: outdoor.activity,
+        }, function(){
+        })
+
+    const nightlifeResponse = await fetch("https://dream-date.herokuapp.com/nightlife")
+    const nightlife = await nightlifeResponse.json()
+    this.setState({
+            nightlife: nightlife.activity,
+        }, function(){
+        })
+        const storage = await AsyncStorage.getItem('token')
             .then(jwtDecode)
             .then(token => {
                 this.setState(() => {
@@ -47,65 +79,11 @@ class QuestionaireForm extends React.Component {
                 })
                 return token.id;
             })
-    }
-
-    getUserData = (token) => {
-        return fetch(`https://dream-date.herokuapp.com/users/${token}`, {
-            method: 'GET',
-            mode: 'cors',
-            headers: {
-                'Content-Type': 'application/json; charset=utf-8'
-            },
+        const getUser = await fetch(`https://dream-date.herokuapp.com/users/${storage}`)
+        const user = await getUser.json()
+        this.setState({
+            user: user
         })
-            .then(res => res.json())
-    }
-
-    getCategories = (item) => {
-        return fetch(`https://dream-date.herokuapp.com/${item}`, {
-            method: 'GET',
-            mode: 'cors',
-            headers: {
-                'Content-Type': 'application/json; charset=utf-8'
-            },
-        })
-        .then(res => res.json())
-    }
-
-    setThatState = (item) => {
-        return this.setState({
-            item: item.item,
-        }, 
-        function(){
-        })
-    }
-
-    componentDidMount() {
-        this.retrieveToken()
-            .then(this.getUserData)
-            .then(this.getCategories('food'))
-            .then(food => {
-                return this.setState({ food: food.food, error: null })
-            })
-            .then(this.getCategories('movie'))
-            .then(movie => {
-                return this.setState({ movie: movie, error: null })
-            })
-            .then(this.getCategories('indoor'))
-            .then(indoor => {
-                return this.setState({ indoor: indoor, error: null })
-            })
-            .then(this.getCategories('outdoor'))
-            .then( outdoor  => {
-                return this.setState({ outdoor: outdoor, error: null })
-            })
-            .then(this.getCategories('nightlife'))
-            .then( nightlife  => {
-                return this.setState({ nightlife: nightlife, error: null })
-            })
-            .catch(err => {
-                console.error(err)
-                this.setState({error: err.message})
-            })
 }
 
 
@@ -129,9 +107,9 @@ render() {
                 style={styles.img}
             />
             <View style={styles.infoContainer}>
-                <Text style={styles.infoText}>Name</Text>
-                <Text style={styles.infoText}>Age</Text>
-                <Text style={styles.infoText}>Location</Text>
+                <Text style={styles.infoText}>Name: </Text>
+                <Text style={styles.infoText}>Age: </Text>
+                <Text style={styles.infoText}>Location: </Text>
             </View>
         </View>
 
