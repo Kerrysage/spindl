@@ -26,6 +26,10 @@ class Matches extends React.Component {
         matches:''
     }
 
+    consoleL=()=>{
+        console.log(this.state)
+    }
+
     retrieveToken = () => {
         if (this.state.token) return Promise.resolve(this.state.token)
 
@@ -76,6 +80,10 @@ class Matches extends React.Component {
 
     grabChoices = () => {
         this.getChoices()
+        .then(this.getCharilie)
+        .then(this.getCharilieMatches)
+        .then(this.getUserMatches)
+        .then(this.findMatch)
         .then(() => this.setState({showChoices: !this.state.showChoices}))
         
         
@@ -87,7 +95,7 @@ class Matches extends React.Component {
         for(key in userCoices){
             user.push(userCoices[key])
         }
-        return user
+        return this.setState({userArr: user})
     }
 
     getCharilieMatches = () => {
@@ -96,18 +104,20 @@ class Matches extends React.Component {
         for(key in charlieChoices){
             charlie.push(charlieChoices[key])
         }
-        return charlie
+        return this.setState({charlieArr: charlie})
     }
 
     findMatch = () => {
         const matches = this.state.userArr.filter((item, index) => {
-            item === this.state.charlieArr[index]
+            return item === this.state.charlieArr[index]
         })
-        return matches
+        const newMatches = matches.join(', ')
+        return this.setState({matches: newMatches})
     }
 
     goHome = () => {
-        this.props.navigation.navigate('Profile')
+        // this.props.navigation.navigate('Profile')
+        console.log(this.state)
     }
 
     componentDidMount() {
@@ -116,12 +126,6 @@ class Matches extends React.Component {
             .then( ({user}) => {
                 return this.setState({ user: user[0], error: null })
             })
-            .then(this.getCharilieMatches)
-            .then(res => this.setState({charlieArr: res}))
-            .then(this.getUserMatches)
-            .then(res => this.setState({userArr: res}))
-            .then(this.findMatch)
-            .then(res => this.setState({matches: res}))
             .catch(err => {
                 console.error(err)
                 this.setState({error: err.message})
@@ -159,20 +163,7 @@ class Matches extends React.Component {
                     {this.state.showChoices ? 
                     <View>
                     <Text style={styles.personText}> Your Matches are:</Text>
-                    <Text style={styles.personText}>{this.state.choices.food_choice1} food,</Text>
-                    <Text style={styles.personText}>favorite movie genre: {this.state.choices.movie_choice1},</Text>
-                    <Text style={styles.personText}>Indoor Activity: {this.state.choices.indoor_choice1},</Text>
-                    <Text style={styles.personText}>Outdoor Activity: {this.state.choices.outdoor_choice1},</Text>
-                    <Text style={styles.personText}>Out on the Town Activity: {this.state.choices.ight_life_choice1},</Text>
-                    </View> : <Text></Text>}
-                    {this.state.showChoices ? 
-                    <View>
-                    <Text style={styles.personText}> Charlie likes...</Text>
-                    <Text style={styles.personText}>{this.state.choices.food_choice1} food,</Text>
-                    <Text style={styles.personText}>favorite movie genre: {this.state.CharlieChoices.movie_choice1},</Text>
-                    <Text style={styles.personText}>Indoor Activity: {this.state.CharlieChoices.indoor_choice1},</Text>
-                    <Text style={styles.personText}>Outdoor Activity: {this.state.CharlieChoices.outdoor_choice1},</Text>
-                    <Text style={styles.personText}>Out on the Town Activity: {this.state.CharlieChoices.ight_life_choice1},</Text>
+                    <Text style={styles.personText}>{this.state.matches} </Text>
                     </View> : <Text></Text>}
                     <TouchableOpacity onPress={this.goHome} style={styles.button}>
                         <Text style={styles.btnText}>Return Home</Text>
