@@ -55,13 +55,7 @@ class Matches extends React.Component {
             },
         })
         .then(res => res.json())
-        .then(choices => {
-            if(choices.error){
-                alert(choices.error)
-            } else { 
-                ({choices}) => this.setState({ choices: choices[0], error: null })
-            }
-            })
+        .then(({choices}) => this.setState({ choices: choices[0], error: null }))
     }
 
     grabChoices = () => {
