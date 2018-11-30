@@ -26,10 +26,6 @@ class Matches extends React.Component {
         matches:''
     }
 
-    consoleL=()=>{
-        console.log(this.state)
-    }
-
     retrieveToken = () => {
         if (this.state.token) return Promise.resolve(this.state.token)
 
@@ -116,8 +112,7 @@ class Matches extends React.Component {
     }
 
     goHome = () => {
-        // this.props.navigation.navigate('Profile')
-        console.log(this.state)
+        this.props.navigation.navigate('Profile')
     }
 
     componentDidMount() {
