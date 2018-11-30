@@ -14,6 +14,7 @@ import {WebBrowser} from 'expo';
 import {MonoText} from '../components/StyledText';
 import { withNavigation } from 'react-navigation';
 import { AsyncStorage } from "react-native"
+const jwtDecode = require('jwt-decode');
 
 // import ModalDropdown from 'react-native-modal-dropdown';
 
