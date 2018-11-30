@@ -119,9 +119,16 @@ class QuestionaireForm extends React.Component {
         if (user !== undefined) {
             return (
                 <View style={styles.infoContainer}>
-                <Text style={styles.infoText}>Name: {this.state.user.name}</Text>
-                <Text style={styles.infoText}>Age: {this.state.user.age}</Text>
-                <Text style={styles.infoText}>Location: {this.state.user.location}</Text>
+                    <View style={styles.infoTexTContainer}>
+                        <Text style={styles.infoText}>Name: {this.state.user.name}</Text>
+                    </View>
+                    <View style={styles.infoContainer}>
+                        <Text style={styles.infoText}>Age: {this.state.user.age}</Text>
+                    </View>
+                    <View style={styles.infoTexTContainer}>
+                        <Text style={styles.infoText}>Location: {this.state.user.location}</Text>
+                    </View>
+                    
                 </View>
             )
         }
@@ -225,19 +232,26 @@ const styles = StyleSheet.create({
         height: 150,
         width: 150,
         paddingTop: 50,
-        alignItems: 'flex-start'
+        alignItems: 'flex-start',
+        borderRadius: 75,
     },
     headerContainer: {
         flex: 1,
         flexDirection: 'row',
         justifyContent: 'space-around',
-        borderTopWidth: 5,
-        borderTopColor: "#fff",
-        borderBottomColor: '#fff',
-        borderBottomWidth: 5,
+        backgroundColor: 'rgba(0, 219, 255, 0.8)',
+        // borderColor: 'rgba(255, 255, 255, 0.8)',
+        // borderWidth: 5,
+        borderRadius: 15,
         padding: 15,
+        paddingTop: 20,
+        paddingBottom: 20,
         marginTop: 20,
-        marginBottom: 10
+        shadowColor: 'rgba(0, 187, 206, 0.6)',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.8,
+        shadowRadius: 2,
+        elevation: 1,
     },
     titlesContainer:{
         marginBottom: 10
@@ -254,7 +268,9 @@ const styles = StyleSheet.create({
         borderColor: '#fff',
         alignItems: 'center',
         textAlign: 'center',
-        backgroundColor: '#ec4760'
+        backgroundColor: '#ec4760',
+        borderRadius: 15,
+        overflow: 'hidden'
     },
     button: {
         alignSelf: 'stretch',
@@ -269,10 +285,6 @@ const styles = StyleSheet.create({
         fontSize: 24,
         fontWeight: 'bold'
     },
-    submit: {
-        borderWidth: 3,
-        borderColor: "#fff",
-    },
     pickerContainer:{
         
     },
@@ -280,46 +292,27 @@ const styles = StyleSheet.create({
         backgroundColor: '#fef4f4',
         color: '#ef508c'
     },
-
-
-    container: {
-        flex: 1,
-        backgroundColor: '#fff',
-        flexDirection: 'column'
-    },
-    profile: {
-        marginTop: 35,
-        width: 100,
-        height: 50,
-        backgroundColor: 'powderblue',
-        marginLeft: 30
-    },
     infoContainer:{
         flex: 1,
         flexDirection: 'column',
         justifyContent: 'space-around',
         marginLeft: 10
     },
+    infoTextContainer: {
+        // borderWidth: 1,
+        borderRadius: 10,
+        overflow: 'hidden',
+        backgroundColor: 'rgba(255, 255, 255, 0.8)',
+    },
     infoText:{
-        fontSize: 20,
-        color: '#fff',
+        fontSize: 16,
+        color: 'rgba(0, 0, 0, 0.7)',
         paddingBottom: 10,
         paddingTop: 10,
-        borderBottomColor: "#fff",
-        borderBottomWidth: 1,
-        textAlign: 'center'
-    },
-    outside: {
-        display: 'flex',
-        flexDirection: 'column'
-    },
-   
-    submitFlex: {
-        display: 'flex',
-        flexDirection: 'row'
-    },
-    contentContainer: {
-        paddingVertical: 20
+        // borderBottomColor: "#fff",
+        // borderBottomWidth: 1,
+        textAlign: 'center',
+        // borderColor: "#000",
     },
 
 })
