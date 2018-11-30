@@ -177,6 +177,7 @@ const styles = StyleSheet.create({
         padding:20,
         backgroundColor: '#83cfc9',
         marginTop: 30,
+        borderRadius: 15
     },
     btnText: {
         color: 'rgba(255, 255, 255, 0.8)',
