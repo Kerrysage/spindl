@@ -97,8 +97,8 @@ render() {
                 <Picker 
                     selectedValue={this.state.FoodSelected} 
                     style={styles.picker}
-                    placeholder= 'Select Favorite Food'
                     onValueChange={(itemValue, itemIndex) => this.setState({FoodSelected: itemValue})}
+                    itemStyle={{color: "#494141", alignItems: 'center', fontSize:24 }}
                     >   
                     {/* <Picker.Item enabled="false" label="" value="" /> */}
                     {this.dropDownMenu(this.state.food)}
@@ -114,6 +114,7 @@ render() {
                 selectedValue={this.state.MovieSelected} 
                 style={styles.picker}
                 onValueChange={(itemValue, itemIndex) => this.setState({MoviesSelected: itemValue})}
+                itemStyle={{color: "#494141", alignItems: 'center', fontSize:24 }}
                 >
                 { this.dropDownMenu(this.state.movie) }
             </Picker>
@@ -128,6 +129,7 @@ render() {
                     selectedValue={this.state.IndoorSelected} 
                     style={styles.picker}
                     onValueChange={(itemValue, itemIndex) => this.setState({IndoorSelected: itemValue})}
+                    itemStyle={{color: "#494141", alignItems: 'center', fontSize:24 }}
                     >
                     { this.dropDownMenu(this.state.indoor) }
                 </Picker>
@@ -141,6 +143,7 @@ render() {
                     selectedValue={this.state.OutdoorSelected} 
                     style={styles.picker}
                     onValueChange={(itemValue, itemIndex) => this.setState({OutdoorSelected: itemValue})}
+                    itemStyle={{color: "#494141", alignItems: 'center', fontSize:24 }}
                     >
                 { this.dropDownMenu(this.state.outdoor) }
             </Picker>
@@ -155,6 +158,7 @@ render() {
                 selectedValue={this.state.NightlifeSelected} 
                 style={styles.picker}
                 onValueChange={(itemValue, itemIndex) => this.setState({NightlifeSelected: itemValue})}
+                itemStyle={{color: "#494141", alignItems: 'center', fontSize:24 }}
             >
                 { this.dropDownMenu(this.state.nightlife) }
             </Picker>
@@ -216,15 +220,16 @@ const styles = StyleSheet.create({
     },
     btnText: {
         color: 'rgba(255, 255, 255, 0.8)',
-        fontSize: 16,
+        fontSize: 24,
         fontWeight: 'bold'
     },
     pickerContainer: {
         borderWidth: 3,
-        borderColor: "#ffd7d7",
+        borderColor: '#ffd7d7',
     },
     picker:{
-        
+        backgroundColor: '#fef4f4',
+        color: '#ef508c'
     },
 
 
@@ -247,7 +252,7 @@ const styles = StyleSheet.create({
         marginLeft: 10
     },
     infoText:{
-        fontSize: 16,
+        fontSize: 20,
         color: '#fff',
         paddingBottom: 10,
         paddingTop: 10,
