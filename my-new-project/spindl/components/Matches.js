@@ -10,17 +10,90 @@ import {
     View,
 } from 'react-native';
 import { withNavigation } from 'react-navigation';
+import { AsyncStorage } from "react-native"
+const jwtDecode = require('jwt-decode');
 
 
 class Matches extends React.Component {
 
+    state = {
+        user: '',
+        choices: '',
+        showChoices: false
+    }
+
+    retrieveToken = () => {
+        if (this.state.token) return Promise.resolve(this.state.token)
+
+        return AsyncStorage.getItem('token')
+            .then(jwtDecode)
+            .then(token => {
+                this.setState(() => {
+                    return {token: token.id} 
+                })
+                return token.id;
+            })
+    }
+
+    getData = (token) => {
+        return fetch(`https://dream-date.herokuapp.com/users/${token}`, {
+            method: 'GET',
+            mode: 'cors',
+            headers: {
+                'Content-Type': 'application/json; charset=utf-8'
+            },
+        })
+            .then(res => res.json())
+    }
+
+    getChoices = () => {
+        return fetch(`https://dream-date.herokuapp.com/choices/${this.state.token}`, {
+            method: 'GET',
+            mode: 'cors',
+            headers: {
+                'Content-Type': 'application/json; charset=utf-8'
+            },
+        })
+        .then(res => res.json())
+        .then(({ choices }) => {
+                return this.setState({ choices: choices[0], error: null })
+            })
+    }
+
+    grabChoices = () => {
+        this.getChoices()
+        .then(() => this.setState({showChoices: !this.state.showChoices}))
+        
+        
+    }
+
+    goHome = () => {
+        this.props.navigation.navigate('Profile')
+    }
+
+    componentDidMount() {
+        this.retrieveToken()
+            .then(this.getData)
+            .then( ({user}) => {
+                return this.setState({ user: user[0], error: null })
+            })
+            // .then(this.getChoices(this.state.user.id))
+            // .then(({ choices }) => {
+            //     return this.setState({ choices: choices[0], error: null })
+            // })
+            .catch(err => {
+                console.error(err)
+                this.setState({error: err.message})
+            })
+    }
     render() {
         return (
-            <View style={styles.MatchScreen}>
+            <ScrollView style={styles.MatchScreen}>
+            <View >
                 <Text style={styles.header}>My Matches</Text>
                 <View style={styles.matchContainer}>
                     <View style={styles.personContainer}>
-                        <Text style={styles.personText}>Dan</Text>
+                        <Text style={styles.personText}>{this.state.user.name}</Text>
                         <Image 
                             style={styles.matchImg} 
                             source={{uri:'https://placeimg.com/200/200/people'}}
@@ -39,16 +112,30 @@ class Matches extends React.Component {
                     </View>
                 </View>
                 <View style={styles.btnContainer}>
-                    <TouchableOpacity onPress={this.consoleLog} style={styles.button}>
-                        <Text style={styles.btnText}>Add New Match</Text>
+                    <TouchableOpacity onPress={this.grabChoices} style={styles.button}>
+                        <Text style={styles.btnText}>Show Choices</Text>
+                    </TouchableOpacity>
+                    {this.state.showChoices ? 
+                    <View>
+                    <Text> {this.state.user.name} likes...</Text>
+                    <Text>{this.state.choices.food_choice1} food,</Text>
+                    <Text>favorite movie genre: {this.state.choices.movie_choice1},</Text>
+                    <Text>Indoor Activity: {this.state.choices.indoor_choice1},</Text>
+                    <Text>Outdoor Activity: {this.state.choices.outdoor_choice1},</Text>
+                    <Text>Out on the Town Activity: {this.state.choices.ight_life_choice1},</Text>
+                    </View> : <Text></Text>}
+                    <TouchableOpacity onPress={this.goHome} style={styles.button}>
+                        <Text style={styles.btnText}>Return Home</Text>
                     </TouchableOpacity>
                 </View>
             </View>
+            </ScrollView>
         )
     }
 }
 
 const styles = StyleSheet.create({
+    
     MatchScreen: {
         alignSelf: 'stretch'
     },

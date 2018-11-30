@@ -10,8 +10,6 @@ import {
     TouchableOpacity,
     View
 } from 'react-native';
-import {WebBrowser} from 'expo';
-import {MonoText} from '../components/StyledText';
 import { withNavigation } from 'react-navigation';
 import { AsyncStorage } from "react-native"
 const jwtDecode = require('jwt-decode');
@@ -30,13 +28,47 @@ class QuestionaireForm extends React.Component {
         IndoorSelected: '',
         OutdoorSelected: '',
         NightlifeSelected: '',
+        user: ''
     };
 
     clickMe = () => {
         console.log(this.state)
+        return fetch (`https://dream-date.herokuapp.com/choices`, {
+            method: 'POST',
+            mode: 'cors',
+            headers: {
+                'Content-Type': 'Application/json; charset=utf-8'
+            },
+            body: JSON.stringify({
+            "movie_choice1": this.state.MoviesSelected,
+            "food_choice1": this.state.FoodSelected,
+            "indoor_choice1": this.state.IndoorSelected,
+            "outdoor_choice1": this.state.OutdoorSelected,
+            "night_life_choice1": this.state.NightlifeSelected
+            })
+        })
+        .then(response => response.json())
+        .then(response => {
+            if(response.error){
+                alert(response.error)
+            } else {
+                this.props.navigation.navigate('Profile')
+            }
+        })
     }
 
     async componentDidMount() {
+        const storage = await AsyncStorage.getItem('token')
+        const decode = await jwtDecode(storage)
+        const token = await decode.id
+        const getUser = await fetch(`https://dream-date.herokuapp.com/users/${token}`)
+        const user = await getUser.json()
+        this.setState({
+            user: user.user
+        },
+        function(){
+            
+        })
         const foodResponse = await fetch("https://dream-date.herokuapp.com/food")
         const food = await foodResponse.json()
         this.setState({
@@ -71,19 +103,6 @@ class QuestionaireForm extends React.Component {
             nightlife: nightlife.activity,
         }, function(){
         })
-        const storage = await AsyncStorage.getItem('token')
-            .then(jwtDecode)
-            .then(token => {
-                this.setState(() => {
-                    return {token: token.id} 
-                })
-                return token.id;
-            })
-        const getUser = await fetch(`https://dream-date.herokuapp.com/users/${storage}`)
-        const user = await getUser.json()
-        this.setState({
-            user: user
-        })
 }
 
 
@@ -95,9 +114,19 @@ class QuestionaireForm extends React.Component {
         return (activityList)
             }
         }
+    userInfo(user) {
+        if (user !== undefined) {
+            return (
+                <View style={styles.infoContainer}>
+                <Text style={styles.infoText}>Name: {this.state.user.name}</Text>
+                <Text style={styles.infoText}>Age: {this.state.user.age}</Text>
+                <Text style={styles.infoText}>Location: {this.state.user.location}</Text>
+                </View>
+            )
+        }
+    }
 
 render() {
-    // console.log(this.state.FoodSelected);
     return (
         <ScrollView style={styles.Questionaire}>
         <View style={styles.headerContainer}>
@@ -106,11 +135,7 @@ render() {
                 fadeDuration={0} 
                 style={styles.img}
             />
-            <View style={styles.infoContainer}>
-                <Text style={styles.infoText}>Name: </Text>
-                <Text style={styles.infoText}>Age: </Text>
-                <Text style={styles.infoText}>Location: </Text>
-            </View>
+            {this.userInfo(this.state.user)}
         </View>
 
         <Text style={styles.titles}>Favorite Type of Food?</Text>
