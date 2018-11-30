@@ -75,7 +75,7 @@ class SignInForm extends React.Component {
                 }} style={styles.textInput} placeholder='Password' secureTextEntry={true}/>
 
                 <TouchableOpacity onPress={this.signIn} style={styles.button}>
-                    <Text style={styles.btnText}>Sign In</Text>
+                    <Text style={styles.btnText}>Submit</Text>
                 </TouchableOpacity>
                     <Text style={styles.link} onPress={this.signUp}>Create New Account</Text>
             </View>
@@ -90,6 +90,7 @@ const styles = StyleSheet.create({
     },
     header:{
         fontSize: 24,
+        backgroundColor: '#F99367',
         color: '#fff',
         paddingBottom:10,
         paddingTop: 10,
@@ -99,7 +100,7 @@ const styles = StyleSheet.create({
         borderWidth: 3,
         borderColor: '#fff',
         alignItems: 'center',
-        textAlign: 'center'
+        textAlign: 'center',
     },
     textInput:{
         alignSelf: 'stretch',
@@ -123,6 +124,7 @@ const styles = StyleSheet.create({
         padding:20,
         backgroundColor: '#83cfc9',
         marginTop: 30,
+        borderRadius: 15,
     },
     btnText: {
         color: 'rgba(255, 255, 255, 0.8)',

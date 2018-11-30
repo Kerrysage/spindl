@@ -86,17 +86,23 @@ class HomeScreen extends React.Component {
                     source={{uri:'https://placeimg.com/200/200/people'}}
                     />
                 <View style={styles.infoContainer}>
+                    <View style={styles.infoTextContainer}>
                         <Text style={styles.infoText}>
                             Name: {this.state.user.name}
                         </Text>
+                    </View>
+                    <View style={styles.infoTextContainer}>
                         <Text style={styles.infoText}>
                             Age: {this.state.user.age}
                         </Text>
+                    </View>
+                    <View style={styles.infoTextContainer}>
                         <Text style={styles.infoText}>
                             Location: {this.state.user.location}
                         </Text>
                     </View>
                 </View>
+            </View>    
                 <View style={styles.btnContainer}>
                     <TouchableOpacity  style={styles.button}>
                         <Text style={styles.btnText}>Add New Match</Text>
@@ -118,36 +124,61 @@ const styles = StyleSheet.create({
         flex: 1,
         flexDirection: 'row',
         justifyContent: 'space-around',
-        borderTopWidth: 5,
-        borderTopColor: "#fff",
-        borderBottomColor: '#fff',
-        borderBottomWidth: 5,
+        backgroundColor: 'rgba(0, 219, 255, 0.8)',
+        // borderColor: 'rgba(255, 255, 255, 0.8)',
+        // borderWidth: 5,
+        borderRadius: 15,
         padding: 15,
-        marginTop: 20
+        paddingTop: 20,
+        paddingBottom: 20,
+        marginTop: 20,
+        shadowColor: 'rgba(0, 187, 206, 0.6)',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.8,
+        shadowRadius: 2,
+        elevation: 1,
+
     },
     imgContainer:{  
-        
+        shadowColor: 'rgba(0, 187, 206, 0.6)',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.8,
+        shadowRadius: 2,
+        elevation: 1,
+        overflow: 'hidden',
+        borderWidth: 1
     },
     img:{
         height: 150,
         width: 150,
         paddingTop: 50,
-        alignItems: 'flex-start'
+        alignItems: 'flex-start',
+        borderRadius: 75,
     },
     infoContainer:{
         flex: 1,
         flexDirection: 'column',
         justifyContent: 'space-around',
-        marginLeft: 10
+        marginLeft: 10, 
+        // backgroundColor: 'rgba(255, 255, 255, 0.8)',
+        
+
     },
     infoText:{
         fontSize: 16,
-        color: '#fff',
+        color: 'rgba(0, 0, 0, 0.7)',
         paddingBottom: 10,
         paddingTop: 10,
-        borderBottomColor: "#fff",
-        borderBottomWidth: 1,
-        textAlign: 'center'
+        // borderBottomColor: "#fff",
+        // borderBottomWidth: 1,
+        textAlign: 'center',
+        // borderColor: "#000",
+    },
+    infoTextContainer: {
+        // borderWidth: 1,
+        borderRadius: 10,
+        overflow: 'hidden',
+        backgroundColor: 'rgba(255, 255, 255, 0.8)',
     },
     btnContainer: {
         marginTop: 10
@@ -158,6 +189,7 @@ const styles = StyleSheet.create({
         padding: 20,
         backgroundColor: '#f22048',
         marginTop: 30,
+        borderRadius: 15,
     },
     btnText: {
         color: 'rgba(255, 255, 255, 0.8)',
