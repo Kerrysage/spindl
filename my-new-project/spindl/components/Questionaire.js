@@ -100,6 +100,7 @@ render() {
     // console.log(this.state.FoodSelected);
     return (
         <ScrollView style={styles.Questionaire}>
+<<<<<<< HEAD
         <View style={styles.headerContainer}>
             <Image 
                 source={{uri: 'https://placeimg.com/200/200/people'}} 
@@ -110,22 +111,50 @@ render() {
                 <Text style={styles.infoText}>Name: </Text>
                 <Text style={styles.infoText}>Age: </Text>
                 <Text style={styles.infoText}>Location: </Text>
+=======
+            <View style={styles.headerContainer}>
+                <Image 
+                    source={{uri: 'https://placeimg.com/200/200/people'}} 
+                    fadeDuration={0} 
+                    style={styles.img}
+                />
+                <View style={styles.infoContainer}>
+                    <Text style={styles.infoText}>Name</Text>
+                    <Text style={styles.infoText}>Age</Text>
+                    <Text style={styles.infoText}>Location</Text>
+                </View>
             </View>
-        </View>
 
-        <Text style={styles.titles}>Favorite Type of Food?</Text>
+            <Text style={styles.titles}>Favorite Type of Food?</Text>
+                <View style={styles.pickerContainer}>
+                    <Picker 
+                        selectedValue={this.state.FoodSelected} 
+                        style={styles.picker}
+                        onValueChange={(itemValue, itemIndex) => this.setState({FoodSelected: itemValue})}
+                        itemStyle={{color: "#494141", alignItems: 'center', fontSize:24 }}
+                        >   
+                        {/* <Picker.Item enabled="false" label="" value="" /> */}
+                        {this.dropDownMenu(this.state.food)}
+                    </Picker>
+                </View>
+
+            <View style={styles.titlesContainer}>
+                <Text style={styles.titles}>Favorite Genre of Movies?</Text>
+>>>>>>> 839f2f601be7e581a0c26e1bcd8054fce123e711
+            </View>
+
             <View style={styles.pickerContainer}>
                 <Picker 
-                    selectedValue={this.state.FoodSelected} 
+                    selectedValue={this.state.MovieSelected} 
                     style={styles.picker}
-                    onValueChange={(itemValue, itemIndex) => this.setState({FoodSelected: itemValue})}
+                    onValueChange={(itemValue, itemIndex) => this.setState({MoviesSelected: itemValue})}
                     itemStyle={{color: "#494141", alignItems: 'center', fontSize:24 }}
-                    >   
-                    {/* <Picker.Item enabled="false" label="" value="" /> */}
-                    {this.dropDownMenu(this.state.food)}
+                    >
+                    { this.dropDownMenu(this.state.movie) }
                 </Picker>
             </View>
 
+<<<<<<< HEAD
         <View style={styles.titlesContainer}>
             <Text style={styles.titles}>Favorite Genre of Movies?</Text>
         </View>
@@ -146,6 +175,13 @@ render() {
                 <Text style={styles.titles}>Favorite Indoor Activities?</Text>
             </View>
             <View style={styles.submit}>
+=======
+            <View style={styles.titlesContainer}>
+                <Text style={styles.titles}>Favorite Indoor Activities?</Text>
+            </View>
+
+            <View style={styles.pickerContainer}>
+>>>>>>> 839f2f601be7e581a0c26e1bcd8054fce123e711
                 <Picker 
                     selectedValue={this.state.IndoorSelected} 
                     style={styles.picker}
@@ -159,7 +195,12 @@ render() {
             <View style={styles.titlesContainer}>
                 <Text style={styles.titles}>Favorite Outdoor Activities?</Text>
             </View>
+<<<<<<< HEAD
             <View style={styles.submit}>
+=======
+
+            <View style={styles.pickerContainer}>
+>>>>>>> 839f2f601be7e581a0c26e1bcd8054fce123e711
                 <Picker 
                     selectedValue={this.state.OutdoorSelected} 
                     style={styles.picker}
@@ -168,9 +209,25 @@ render() {
                     >
                 { this.dropDownMenu(this.state.outdoor) }
             </Picker>
-            
-        </View>
+                
+            </View>
 
+            <View style={styles.titlesContainer}>
+                <Text style={styles.titles}>Nightlife?</Text>
+            </View >
+
+            <View style={styles.pickerContainer}>
+                <Picker 
+                    selectedValue={this.state.NightlifeSelected} 
+                    style={styles.picker}
+                    onValueChange={(itemValue, itemIndex) => this.setState({NightlifeSelected: itemValue})}
+                    itemStyle={{color: "#494141", alignItems: 'center', fontSize:24 }}
+                >
+                    { this.dropDownMenu(this.state.nightlife) }
+                </Picker>
+            </View>
+
+<<<<<<< HEAD
         <View style={styles.titlesContainer}>
             <Text style={styles.titles}>Nightlife?</Text>
         </View>
@@ -182,6 +239,8 @@ render() {
             >
                 { this.dropDownMenu(this.state.nightlife) }
             </Picker>
+=======
+>>>>>>> 839f2f601be7e581a0c26e1bcd8054fce123e711
             <TouchableOpacity style={styles.button} onPress={this.clickMe}> 
                 <Text style={styles.btnText}>Send It</Text>
             </TouchableOpacity>
@@ -239,7 +298,7 @@ const styles = StyleSheet.create({
     },
     btnText: {
         color: 'rgba(255, 255, 255, 0.8)',
-        fontSize: 24,
+        fontSize: 16,
         fontWeight: 'bold'
     },
     submit: {
@@ -256,13 +315,6 @@ const styles = StyleSheet.create({
     picker:{
         backgroundColor: '#fef4f4',
         color: '#ef508c'
-    },
-
-
-    container: {
-        flex: 1,
-        backgroundColor: '#fff',
-        flexDirection: 'column'
     },
     profile: {
         marginTop: 35,
@@ -286,18 +338,7 @@ const styles = StyleSheet.create({
         borderBottomWidth: 1,
         textAlign: 'center'
     },
-    outside: {
-        display: 'flex',
-        flexDirection: 'column'
-    },
-   
-    submitFlex: {
-        display: 'flex',
-        flexDirection: 'row'
-    },
-    contentContainer: {
-        paddingVertical: 20
-    },
+
 
 })
 

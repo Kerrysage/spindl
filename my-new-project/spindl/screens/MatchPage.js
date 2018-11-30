@@ -42,7 +42,7 @@ class MatchPage extends React.Component {
 const styles = StyleSheet.create({
     scrollView:{
         flex: 1,
-        backgroundColor: '#83cfc9'
+        backgroundColor: '#f69eac'
     },
     container:{
         paddingHorizontal: 10,
